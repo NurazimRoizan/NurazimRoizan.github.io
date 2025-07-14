@@ -1,7 +1,8 @@
 ---
-title: "Paper Title Number 5, with math $$E=mc^2$$"
+title: "Electronic 1"
 collection: publications
-category: conferences
+category: electronics
+price: 22
 permalink: /publication/2024-02-17-paper-title-number-4
 excerpt: 'This paper is about a famous math equation, $$E=mc^2$$'
 date: 2024-02-17
