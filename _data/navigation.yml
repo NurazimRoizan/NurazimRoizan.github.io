@@ -11,17 +11,20 @@ main:
   - title: "Stuff To Let Go"
     url: /publications/
 
-  - title: "Talks"
-    url: /talks/    
+  #- title: "Talks"
+  #  url: /talks/    
 
-  - title: "Teaching"
-    url: /teaching/    
+  - title: "Project"
+    url: /404/
+  #  url: /teaching/    
     
   - title: "Portfolio"
-    url: /portfolio/
+    url: /404/
+  #  url: /portfolio/
         
   - title: "Blog Posts"
-    url: /year-archive/
+    url: /404/
+  #  url: /year-archive/
     
   - title: "CV"
     url: /cv/
@@ -30,4 +33,5 @@ main:
   #   url: /cv-json/
     
   - title: "Guide"
-    url: /markdown/
+    url: /404/
+  #  url: /markdown/

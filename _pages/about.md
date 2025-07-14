@@ -6,9 +6,9 @@ redirect_from:
   - /about/
   - /about.html
 ---
-Welcome to Jimi's Digital Playground where I spend my days designing virtual coffee.
+Welcome to my digital playground where I spend my days designing virtual coffee.
 
-Think of this as my digital sketchbook, where I stash all the cool (and sometimes quirky) stuff I've been working on. Whether it's a project that made me pull an all-nighter (in a good way!), a random thought I couldn't shake, or just something I'm genuinely excited about, you'll probably find it here.
+Think of this as my digital sketchbook, where I stash all the cool stuff I've been working on. Whether it's a project that made me pull an all-nighter, a random thought I couldn't shake, or just something I'm genuinely excited about, you'll probably find it here.
 
 What's brewing? ☕
 ======
