@@ -3,7 +3,7 @@ title: "Acer KA272H 27in 100Hz FHD Monitor"
 collection: publications
 category: electronics
 permalink: /publication/monitor
-excerpt: 'Very good condition. No dead pixel.<br/><br/><img src="/images/monitor.png">'
+excerpt: 'Very good condition. No dead pixel.<br/><br/><img src="/images/monitor.png" class="consistent-image">'
 price: "70"
 retailurl: 'https://www.argos.co.uk/product/4015307?rec=PDP[7634170]:bottomSlider:P1:OHAT:alternatives:4015307:IKD5YQc6og1dEHx0IjZl'
 ---

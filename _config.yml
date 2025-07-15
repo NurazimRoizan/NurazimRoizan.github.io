@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "Nurazim Roizan / Portfolio"
+title                    : "Nurazim Roizan / Home"
 title_separator          : "-"
 name                     : &name "Nurazim Roizan"
 description              : &description "Seorang manusia hebat luar biasa"

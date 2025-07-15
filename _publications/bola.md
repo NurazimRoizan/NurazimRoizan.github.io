@@ -3,7 +3,7 @@ title: "Soft Toy - Football"
 collection: publications
 category: miscellaneous
 permalink: /publication/bola
-excerpt: 'sesuai untuk anak2 kecik.<br/><br/><img src="/images/bola.png">'
+excerpt: 'sesuai untuk anak2 kecik.<br/><br/><img src="/images/bola.png" class="consistent-image">'
 price: "0.99"
 retailurl: 'https://www.ikea.com/gb/en/p/sparka-soft-toy-football-black-white-20506763/'
 ---

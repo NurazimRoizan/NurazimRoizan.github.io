@@ -3,7 +3,7 @@ title: "Ikea Table Lamp (Bulb included)"
 collection: publications
 category: electronics
 permalink: /publication/tablelamp
-excerpt: 'Lampu Stylo.<br/><br/><img src="/images/tablelamp.png">'
+excerpt: 'Lampu Stylo.<br/><br/><img src="/images/tablelamp.png" class="consistent-image">'
 price: "8.99"
 retailurl: 'https://www.ikea.com/gb/en/p/forsa-work-lamp-black-80106012/'
 ---

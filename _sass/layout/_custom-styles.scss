@@ -1,0 +1,38 @@
+/* _sass/layout/_custom-styles.scss */
+
+.consistent-image {
+    width: 300px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    object-fit: cover; /* Crucial: crops image to fit without distortion */
+    border-radius: 8px; /* Example: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Example: subtle shadow */
+    margin-bottom: 1em; /* Space below the image */
+    display: block; /* Ensures it takes up full width and respects margins */
+    max-width: 100%; /* Essential for responsiveness */
+    height: auto; /* Ensure aspect ratio is maintained when scaling down */
+}
+
+.centered-title {
+    text-align: center; /* This is the magic for centering text */
+    margin-top: 2em; /* Optional: Add some space above the title */
+    margin-bottom: 1em; /* Optional: Add some space below the title */
+}
+
+.whatsapp-button {
+        display: inline-flex; /* Allows icon and text to sit nicely */
+        align-items: center; /* Vertically aligns icon and text */
+        background-color: #25D366; /* WhatsApp green */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        font-family: 'Inter', sans-serif; /* Use Inter font */
+        font-weight: bold;
+        transition: background-color 0.3s ease; /* Smooth hover effect */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        margin-top: 20px; /* Space above the button */
+    }
+
+.whatsapp-button:hover {
+    background-color: #1DA851; /* Slightly darker green on hover */
+}
