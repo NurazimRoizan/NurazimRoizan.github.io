@@ -1,7 +1,7 @@
 ---
 title: "Laptop Bed Table"
 collection: publications
-category: miscellaneous
+category: sold
 permalink: /publication/laptopdesk
 excerpt: 'Small table for studying and breakfast in bed.'
 price: '9.99<br/><br/><img src="/images/laptopdesk.png" class="consistent-image">'
