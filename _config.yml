@@ -22,10 +22,10 @@ repository               : "NurazimRoizan/NurazimRoizan.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   name             : "Nurazim Roizan"
   pronouns         : # example: "she/her"  
-  bio              : "If you want a happy ending, that depends, of course, on where you stop your story \n - Orson Welles"
+  bio              : "If you want a happy ending, that depends, of course, on where you stop your story <br/> - Orson Welles"
   location         : "Upper Hanover"
   employer         : "University of Sheffield"
   uri              : # URL
@@ -52,7 +52,7 @@ author:
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
@@ -66,7 +66,8 @@ author:
   medium           : # URL
   pinterest        : # Username
   soundcloud       : # Username
-  steam            : "zynark"
+  steam            : "arkxenark"
+  strava            : "94939224"
   telegram         : # URL
   tumblr           : # Username
   twitter          : # Username for X / Twitter

@@ -48,6 +48,9 @@ layout: default
 
       <section class="page__content" itemprop="text">
         {{ content }}
+        {% if page.retailurl %}
+          <p><a href=" {{ page.retailurl }} ">Retail Link</a></p>
+        {% endif %}
         {% if page.collection == 'publications' %}
           <a href="https://wa.me/601110618648?text=Hello%20there%21%20I%27m%20interested%20in%20your%20item%3A%20{{ page.title | url_encode }}" target="_blank" rel="noopener noreferrer" class="whatsapp-button">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Logo" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px; border-radius: 5px;">
