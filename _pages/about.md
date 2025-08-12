@@ -18,10 +18,6 @@ When I'm not glued to a screen, you might find me:
 - 🎮 Conquering virtual worlds (or at least trying to).
 - 🃏 Practicing my cardistry and street card magic.
 
-Stuff to let go 📦
-------
-I'm graduating and going back to Malaysia this August so I got tons of beautiful items to let go. Feel free to browse thru the stuff and hit me up if you got your eyes on something. Take a peek [here](/publications/)! 👀
-
 A New Site (and Ongoing Updates) ✨
 ------
  This site represents a migration from my older portfolio site, and I'm currently in the process of transferring and refining all my content here. While I'm working to get everything settled, you might notice some sections are still being populated. Please ignore :)

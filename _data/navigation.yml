@@ -8,18 +8,17 @@
 #      Markdown formatted page while the second is generated using JSON.
 
 main:
-  - title: "Stuff To Let Go"
-    url: /publications/
+  #- title: "Stuff To Let Go"
+  #  url: /publications/
 
   #- title: "Talks"
   #  url: /talks/    
 
   - title: "Project"
-    url: /404/
-  #  url: /teaching/    
+    url: /project/    
     
-  - title: "Portfolio"
-    url: /404/
+  #- title: "Portfolio"
+  #  url: /404/
   #  url: /portfolio/
         
   - title: "Hiking"
