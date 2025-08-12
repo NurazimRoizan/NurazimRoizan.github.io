@@ -31,28 +31,28 @@ Malaysian Certificate of Education:
 # &nbsp;&nbsp;&nbsp;Technical Skills & Projects
 ---
 
-* IT
+* **IT**
   * Languages: Ruby, Java, Python, SQL, JavaScript, ROS, Haskell
   * Software Development Tools: Git (version control), Gradle, Rails
   * Robust skill set with a strong foundation in algorithms and data structures.
 
-* Dissertation Project
+* **Dissertation Project**
   * This project develops an interactive interface to visualize the bijective k-Pebble game and the k-Weisfeiler-
 Leman algorithm, enabling users to explore and understand graph isomorphism – a fundamental problem
 in computer science with applications in areas such as network analysis and pattern recognition.
 
-* Software Hut
+* **Software Hut**
   * Developed a client-facing web application with Ruby on Rails as part of a competitive group project. The platform was designed to facilitate the online sale of train parts and spares, showcasing the ability to engineer a functional software system from conception to delivery.
   * Collaborated with the team and client to define software requirements, develop a solution, and apply agile principles throughout the full software development lifecycle.
 
-* Research Paper - COM3109
+* **Research Paper - COM3109**
   * Researched and documented the CRYSTALS-Kyber (ML-KEM) algorithm, a lattice-based Post-Quantum Cryptography solution. The paper covers the quantum threat to current cryptography, the algorithm's operational mechanics, and its security profile as a NIST standard.
 
-* Engineering You’re Hired (EYH)
+* **Engineering You’re Hired (EYH)**
   * Collaborated within a multi-disciplinary, multi-cultural team to address a complex engineering challenge. This culminated in a conceptual design for a Smart Office, proposing technological solutions to improve environmental sustainability and employee health.
   * The intensive, week-long program provided a framework to apply transferable skills in project planning, problem-solving, and teamwork, in line with Engineering Council standards (AHEP).
 
-* Global Engineering Challenge (GEC)
+* **Global Engineering Challenge (GEC)**
   * Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.
 
 ---
