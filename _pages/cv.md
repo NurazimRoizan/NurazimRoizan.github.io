@@ -14,7 +14,7 @@ redirect_from:
 ---
 ## University of Sheffield, 2025
 BSc in Computer Science 
-* Relevant Modules: Advanced Algorithm, Algorithm, 3D Computer Graphics, Cybersecurity in
+* Relevant Modules: Advanced Algorithm, 3D Computer Graphics, Cybersecurity in
 Action, The Internet of Things, Software Testing and Analysis, Robotics, Logic in
 Computer Science
 
@@ -42,21 +42,18 @@ Leman algorithm, enabling users to explore and understand graph isomorphism – 
 in computer science with applications in areas such as network analysis and pattern recognition.
 
 * Software Hut
-  * Participated in this group project focused on engineering a real software system for a client in a competitive
-environment, gaining practical experience in the full software development lifecycle.
-  * Collaborated with a team to analyse client needs and agree on a software requirement specification, applying
-an agile methodology to develop a solution that met those requirements.
+  * Developed a client-facing web application with Ruby on Rails as part of a competitive group project. The platform was designed to facilitate the online sale of train parts and spares, showcasing the ability to engineer a functional software system from conception to delivery.
+  * Collaborated with the team and client to define software requirements, develop a solution, and apply agile principles throughout the full software development lifecycle.
 
 * Research Paper - COM3109
-  * Kyber ALgorithm
+  * Researched and documented the CRYSTALS-Kyber (ML-KEM) algorithm, a lattice-based Post-Quantum Cryptography solution. The paper covers the quantum threat to current cryptography, the algorithm's operational mechanics, and its security profile as a NIST standard.
 
 * Engineering You’re Hired (EYH)
-  * Participated in this one-week program designed to develop academic, transferable, and employability skills
-through a multi-disciplinary group project, aligned with the Engineering Council Standards (AHEP).
+  * Collaborated within a multi-disciplinary, multi-cultural team to address a complex engineering challenge. This culminated in a conceptual design for a Smart Office, proposing technological solutions to improve environmental sustainability and employee health.
+  * The intensive, week-long program provided a framework to apply transferable skills in project planning, problem-solving, and teamwork, in line with Engineering Council standards (AHEP).
 
 * Global Engineering Challenge (GEC)
-  * In 2023, the program focused on the Govan district of Glasgow, Scotland, where our team tackled the
-challenge of repurposing old buildings and derelict land for social and community benefit.
+  * Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.
 
 ---
 # &nbsp;&nbsp;&nbsp;Work Experience
@@ -101,6 +98,7 @@ different backgrounds.
 * Excellent Award in Foundational Communitative Chinese Language Standardised Examination
 * Facilitator of Junior Scientist Workshop
 
+<!--
 ---
 # &nbsp;&nbsp;&nbsp;Talks
 ---
@@ -108,4 +106,6 @@ different backgrounds.
   <ul>{% for post in site.talks reversed %}
     {% include archive-single-talk-cv.html  %}
   {% endfor %}</ul>
+
+-->
 
