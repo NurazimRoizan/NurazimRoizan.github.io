@@ -1,11 +1,11 @@
 ---
-title: 'Bole Hills'
+title: 'Bole Hill'
 date: 2023-01-14
 permalink: /posts/2023/01/blog-post-3/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - group hike
+  - bole hill
+  - Sheffield
 ---
 
 Second peak I reached after class with my housemates.

@@ -13,7 +13,7 @@ redirect_from:
 # &nbsp;&nbsp;&nbsp;Education
 ---
 ## University of Sheffield, 2025
-BSc in Computer Science 
+Bachelor of Computer Science with Honours 
 * Relevant Modules: Advanced Algorithm, 3D Computer Graphics, Cybersecurity in
 Action, The Internet of Things, Software Testing and Analysis, Robotics, Logic in
 Computer Science
