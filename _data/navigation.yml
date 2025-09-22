@@ -30,6 +30,6 @@ main:
   # - title: "CV"
   #   url: /cv-json/
     
-  - title: "Guide"
-    url: /404/
+  #- title: "Guide"
+  #  url: /404/
   #  url: /markdown/

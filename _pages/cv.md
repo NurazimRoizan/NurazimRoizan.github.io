@@ -53,7 +53,8 @@ in computer science with applications in areas such as network analysis and patt
   * The intensive, week-long program provided a framework to apply transferable skills in project planning, problem-solving, and teamwork, in line with Engineering Council standards (AHEP).
 
 * **Global Engineering Challenge (GEC)**
-  * Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.
+  * Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. 
+  * Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.
 
 ---
 # &nbsp;&nbsp;&nbsp;Work Experience
@@ -74,7 +75,7 @@ in computer science with applications in areas such as network analysis and patt
 
 **Water Watch Programme For Youth Leaders, UNESCO-IHP**
 * Selected as a school representative by the UNESCO School Club to participate in this program focused on
-environement sustainability, teamwork, and leadership skills.
+environment sustainability, teamwork, and leadership skills.
 * Conducted field research on the water quality of local rivers, applying learned techniques to assess pollution
 levels and identify water footprints.
 * Gained practical experience in water quality monitoring, including physicochemical tests and bio-indicator
