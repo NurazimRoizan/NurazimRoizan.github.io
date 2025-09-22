@@ -8,7 +8,7 @@ tags:
   - category2
 ---
 
-This post will show up by default. More to be updated, please ignore. :)
+This post will show up by default. More to be updated. :)
 
 Route
 ======
