@@ -6,6 +6,8 @@ permalink: /project/2025-pwa-piyak
 venue: "HTML, CSS, JavaScript, Open-Source"
 date: 2025-11-2
 location: "Hobby"
+redirect_from:
+  - /piyak
 ---
 
 A Progressive Web App (PWA) for tracking your period cycle and poop counter. I built this to avoid the constant ads and $2 subscription fees of other mobile trackers. Data is saved simply and freely using the Google Forms API.
