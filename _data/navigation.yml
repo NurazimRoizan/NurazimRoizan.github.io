@@ -26,9 +26,6 @@ main:
     
   - title: "CV"
     url: /cv/
-
-  - title: "piyak"
-    url: /project/2025-iot-geeyboard/
     
   # - title: "CV"
   #   url: /cv-json/
