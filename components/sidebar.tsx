@@ -7,11 +7,11 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const contactLinks = [
-    { icon: Mail, label: "Email", href: "mailto:your.email@example.com", color: "text-cyan-400" },
-    { icon: Github, label: "GitHub", href: "https://github.com", color: "text-cyan-400" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", color: "text-cyan-400" },
+    { icon: Mail, label: "Email", href: "mailto:rnurazim@gmail.com", color: "text-cyan-400" },
+    { icon: Github, label: "GitHub", href: "https://github.com/NurazimRoizan", color: "text-cyan-400" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/nurazimroy", color: "text-cyan-400" },
     { icon: MapPin, label: "Strava", href: "/strava", color: "text-orange-500" },
-    { icon: Gamepad2, label: "Steam", href: "https://steamcommunity.com", color: "text-cyan-400" },
+    { icon: Gamepad2, label: "Steam", href: "https://steamcommunity.com/id/arkxenark", color: "text-cyan-400" },
   ]
 
   return (
@@ -32,19 +32,19 @@ export default function Sidebar() {
               <img
                 src="/professional-portrait.jpg"
                 alt="Profile"
-                className="w-24 h-24 rounded-full border-4 border-cyan-400/30 object-cover profile-glow"
+                className="w-45 h-45 rounded-full border-4 border-cyan-400/30 object-cover profile-glow"
               />
             </div>
 
             {/* Name */}
-            <h1 className="text-xl font-bold mb-1">Your Name</h1>
+            <h1 className="text-xl font-bold mb-1">Nurazim Roizan</h1>
 
             {/* Job Title */}
-            <p className="text-cyan-400 font-semibold text-sm mb-5">Full Stack Developer</p>
+            <p className="text-cyan-400 font-semibold text-sm mb-5">University of Sheffield Graduate in Computer Science</p>
 
             {/* Favorite Quote - Compact */}
             <p className="text-muted-foreground italic text-xs leading-relaxed mb-6 p-3 border-l-2 border-orange-500 bg-secondary/50 rounded-r">
-              "Code is poetry written in a language computers understand."
+              "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt. -Jake Peralta"
             </p>
 
             {/* Contact Links - Icon + Label in rows */}
@@ -72,7 +72,7 @@ export default function Sidebar() {
 
         {/* Footer */}
         <div className="text-center text-xs text-muted-foreground">
-          <p>© 2025 Your Name</p>
+          <p>© 2025 Nurazim Roizan</p>
           <p className="mt-1">Crafted with passion</p>
         </div>
       </aside>
@@ -92,7 +92,7 @@ export default function Sidebar() {
 
             {/* Name */}
             <div>
-              <h2 className="text-lg font-bold">Your Name</h2>
+              <h2 className="text-lg font-bold">Nurazim Roizan</h2>
               <p className="text-cyan-400 font-semibold text-sm">Full Stack Developer</p>
             </div>
 
@@ -124,7 +124,7 @@ export default function Sidebar() {
 
             {/* Footer */}
             <div className="text-center text-xs text-muted-foreground pt-3 border-t border-cyan-400/10">
-              <p>© 2025 Your Name</p>
+              <p>© 2025 Nurazim Roizan</p>
             </div>
           </div>
         </div>

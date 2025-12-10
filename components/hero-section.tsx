@@ -15,20 +15,19 @@ export default function HeroSection() {
 
         <div className="mb-8 inline-block">
           <div className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-sm font-medium glow-border">
-            ✨ Welcome to my portfolio
+            Welcome Human
           </div>
         </div>
 
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          I build beautiful{" "}
+          I build handsome{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent">
             digital experiences
           </span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          Full-stack developer passionate about creating innovative solutions. Specialized in modern web technologies
-          and building scalable applications.
+          I'm a developer specializing of making technology comply with my comfort level to solve micro-inefficiencies in life.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

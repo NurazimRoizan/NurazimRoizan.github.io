@@ -22,7 +22,7 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border md:left-72">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
-          Portfolio
+          NurazimRoizan/Portfolio
         </div>
 
         {/* Desktop Menu */}
@@ -35,7 +35,9 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
                 activeSection === item.id ? "text-cyan-400" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {item.label}
+              <Link href="/">
+                {item.label}
+              </Link>
               <span
                 className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-300 transition-all duration-300 ${
                   activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"

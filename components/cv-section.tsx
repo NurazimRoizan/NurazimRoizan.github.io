@@ -24,47 +24,54 @@ interface Education {
 const experiences: Experience[] = [
   {
     id: 1,
-    title: "Senior Full-Stack Developer",
-    company: "Tech Innovations Inc.",
-    period: "2023 - Present",
+    title: "Software Hut",
+    company: "",
+    period: "2025",
     description:
-      "Led development of high-performance web applications using Next.js and React. Mentored junior developers and established coding standards.",
-    skills: ["Next.js", "React", "TypeScript", "PostgreSQL", "Architecture"],
+      "Developed a client-facing web application with Ruby on Rails as part of a competitive group project. The platform was designed to facilitate the online sale of train parts and spares, showcasing the ability to engineer a functional software system from conception to delivery.",
+    skills: ["Ruby on Rails", "Full-stack", "Agile", "SRS", "Git"],
   },
   {
     id: 2,
-    title: "Full-Stack Developer",
-    company: "Digital Solutions Co.",
-    period: "2021 - 2023",
+    title: "Engineering You’re Hired (EYH)",
+    company: "",
+    period: "2024",
     description:
-      "Developed and maintained multiple web applications for Fortune 500 clients. Improved application performance by 40% through optimization.",
-    skills: ["React", "Node.js", "MongoDB", "AWS", "Docker"],
+      "Collaborated within a multi-disciplinary, multi-cultural team to address a complex engineering challenge. This culminated in a conceptual design for a Smart Office, proposing technological solutions to improve environmental sustainability and employee health.",
+    skills: ["Teamwork", "Engineering Council standards (AHEP)", "UKSPEC"],
   },
   {
     id: 3,
-    title: "Frontend Developer",
-    company: "StartUp Labs",
-    period: "2020 - 2021",
+    title: "Global Engineering Challenge (GEC)",
+    company: "",
+    period: "2023",
     description:
-      "Built responsive user interfaces for mobile and web platforms. Collaborated with design team to implement pixel-perfect designs.",
-    skills: ["React", "Vue.js", "Tailwind CSS", "JavaScript", "UI/UX"],
+      "Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.",
+    skills: ["Teamwork", "Engineers Without Borders (EWB)", "UKSPEC"],
   },
 ]
 
 const education: Education[] = [
   {
     id: 1,
-    degree: "B.S. in Computer Science",
-    school: "University of Technology",
-    year: "2020",
-    details: "Specialized in Web Development and Software Engineering",
+    degree: "Bachelor of Computer Science with Honours",
+    school: "University of Sheffield",
+    year: "2025",
+    details: "Relevant Modules: Advanced Algorithm, 3D Computer Graphics, Cybersecurity in Action, The Internet of Things, Software Testing and Analysis, Robotics, Logic in Computer Science",
   },
   {
     id: 2,
-    degree: "Full-Stack Web Development Certification",
-    school: "Code Academy",
+    degree: "Cambridge International A Levels",
+    school: "INTEC Education College",
+    year: "2022",
+    details: "Computer Science (A*), Mathematics (A*), Physics (A*), Further Mathematics (A)",
+  },
+  {
+    id: 3,
+    degree: "Malaysian Certificate of Education",
+    school: "Sekolah Sultan Alam Shah",
     year: "2019",
-    details: "Intensive bootcamp covering modern web technologies and best practices",
+    details: "6A+, 3A (including GCE 0 Level English-1119)",
   },
 ]
 
@@ -73,14 +80,15 @@ const skills = [
   "React",
   "Next.js",
   "Node.js",
-  "PostgreSQL",
-  "MongoDB",
+  "Java",
+  "Ruby on Rails",
   "Tailwind CSS",
   "Git",
   "Docker",
-  "AWS",
-  "REST APIs",
-  "GraphQL",
+  "Python",
+  "C++",
+  "Haskell",
+  "ESP32",
 ]
 
 export default function CVSection() {
@@ -90,7 +98,7 @@ export default function CVSection() {
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Professional Background</h2>
           <p className="text-lg text-muted-foreground">
-            My journey in software development and key achievements throughout my career.
+            My journey in software development and key achievements throughout my university.
           </p>
         </div>
 
