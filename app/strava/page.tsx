@@ -83,8 +83,8 @@ export default async function StravaPage() {
           {activities.length === 0 && (
             <Card className="mb-16 p-8 border-red-400/20 bg-red-500/10">
               <p className="text-red-400 text-center">
-                Failed to load Strava activities. Please check if your STRAVA_ACCESS_TOKEN environment variable is
-                correctly set.
+                Failed to load Strava activities. I guess my STRAVA_ACCESS_TOKEN has expired. I should have been working on it or I have not found the time. 
+                Sorry for any inconveniences
               </p>
             </Card>
           )}

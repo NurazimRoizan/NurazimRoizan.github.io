@@ -16,7 +16,6 @@ interface ProjectModalProps {
     github?: string
     live?: string
     features: string[]
-    technologies: string[]
     duration: string
     role: string
   } | null
@@ -102,7 +101,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             {/* Meta Info */}
             <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-cyan-400/20">
               <div>
-                <p className="text-muted-foreground text-sm">Duration</p>
+                <p className="text-muted-foreground text-sm">Type</p>
                 <p className="font-semibold text-cyan-400">{project.duration}</p>
               </div>
               <div>
@@ -128,21 +127,6 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Technologies */}
-            <div className="mb-6">
-              <h3 className="text-lg font-bold mb-3">Technologies Used</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-sm bg-cyan-400/10 text-cyan-400 rounded-full border border-cyan-400/20"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
             </div>
 
             {/* All Tags */}

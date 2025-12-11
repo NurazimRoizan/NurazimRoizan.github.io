@@ -15,7 +15,6 @@ interface Project {
   github?: string
   live?: string
   features: string[]
-  technologies: string[]
   duration: string
   role: string
 }
@@ -32,17 +31,13 @@ const projects: Project[] = [
     github: "https://github.com/NurazimRoizan/dissertation-com3610",
     live: "https://github.com/NurazimRoizan/dissertation-com3610",
     features: [
-      "Secure user authentication and authorization",
-      "Product catalog with advanced filtering and search",
-      "Real-time shopping cart and checkout",
-      "Stripe payment integration with webhooks",
-      "Admin dashboard for inventory management",
-      "Order tracking and customer notifications",
-      "Analytics and sales reports",
+      "Standalone Desktop Application",
+      "Integrated Theoretical Visualization",
+      "Configurable k-Pebble Game Simulation",
+      "Interactive 1-Dimensional Weisfeiler-Leman (1-WL) Algorithm",
     ],
-    technologies: ["Next.js 15", "TypeScript", "PostgreSQL", "Stripe API", "TailwindCSS", "Docker"],
-    duration: "4 months",
-    role: "Full Stack Developer",
+    duration: "Individual Project",
+    role: "Author",
   },
   {
     id: 2,
@@ -52,17 +47,14 @@ const projects: Project[] = [
     tags: ["C++", "Embedded Systems", "ESP32-S3", "Arduino", "unPhone"],
     image: "/dinoGameUI.jpeg",
     features: [
-      "Real-time streaming responses",
-      "Context-aware conversations",
-      "Multi-language support with auto-detection",
-      "Conversation history and bookmarks",
-      "Custom prompt templates",
-      "Token usage tracking and billing",
-      "Export conversations as PDF or markdown",
+      "Embedded C++ & Custom Firmware",
+      "Dual-Input Custom Game Controller",
+      "Sensor-Driven Input",
+      "IoT Network Communication",
+      "Custom UI Development",
     ],
-    technologies: ["React", "OpenAI API", "AI SDK", "WebSockets", "Express.js", "MongoDB"],
-    duration: "2 months",
-    role: "Full Stack Developer",
+    duration: "Duo Project",
+    role: "Lead Project",
   },
   {
     id: 3,
@@ -72,17 +64,13 @@ const projects: Project[] = [
     tags: ["Quantum Cryptography", "Cybersecurity", "RnD", "Algorithm"],
     image: "/UoSLogo.png",
     features: [
-      "Real-time streaming responses",
-      "Context-aware conversations",
-      "Multi-language support with auto-detection",
-      "Conversation history and bookmarks",
-      "Custom prompt templates",
-      "Token usage tracking and billing",
-      "Export conversations as PDF or markdown",
+      "Focus on Post-Quantum Cryptography (PQC)",
+      "Comprehensive Algorithmic Breakdown",
+      "In-Depth Security Analysis",
+      "NIST Standard Exploration",
     ],
-    technologies: ["React", "OpenAI API", "AI SDK", "WebSockets", "Express.js", "MongoDB"],
-    duration: "2 months",
-    role: "Full Stack Developer",
+    duration: "Individual Coursework",
+    role: "Author",
   },
   {
     id: 4,
@@ -94,17 +82,15 @@ const projects: Project[] = [
     github: "https://github.com/NurazimRoizan/GeeyBoard",
     live: "https://github.com/NurazimRoizan/GeeyBoard",
     features: [
-      "Real-time task updates across devices",
-      "Team collaboration with permissions",
-      "Task comments and file attachments",
-      "Progress tracking and timeline views",
-      "Custom workflows and statuses",
-      "Activity logs and audit trails",
-      "Mobile-responsive design",
+      "Multi-Functional Control Unit",
+      "BLE HID Emulation (NimBLE Stack)",
+      "Advanced Embedded C++ Firmware",
+      "IR Protocol Integration",
+      "Manual Connection State Management",
+      "Custom Key Mapping",
     ],
-    technologies: ["React", "Firebase", "Zustand", "Socket.io", "TailwindCSS", "React Query"],
-    duration: "3 months",
-    role: "Full Stack Developer",
+    duration: "Hobby Project",
+    role: "Author",
   },
   {
     id: 5,
@@ -116,17 +102,13 @@ const projects: Project[] = [
     github: "https://github.com/NurazimRoizan/PiYak",
     live: "https://nurazimroizan.github.io/PiYak/",
     features: [
-      "Real-time task updates across devices",
-      "Team collaboration with permissions",
-      "Task comments and file attachments",
-      "Progress tracking and timeline views",
-      "Custom workflows and statuses",
-      "Activity logs and audit trails",
-      "Mobile-responsive design",
+      "Progressive Web App (PWA) Implementation",
+      "Zero-Cost, Serverless Backend",
+      "Community Data Feature",
+      "Clean Front-End Development",
     ],
-    technologies: ["React", "Firebase", "Zustand", "Socket.io", "TailwindCSS", "React Query"],
-    duration: "3 months",
-    role: "Full Stack Developer",
+    duration: "Hobby Project",
+    role: "Author",
   },
   {
     id: 6,
@@ -138,17 +120,13 @@ const projects: Project[] = [
     github: "https://github.com/muazsazelim/tanahkubur",
     live: "https://github.com/muazsazelim/tanahkubur",
     features: [
-      "Real-time task updates across devices",
-      "Team collaboration with permissions",
-      "Task comments and file attachments",
-      "Progress tracking and timeline views",
-      "Custom workflows and statuses",
-      "Activity logs and audit trails",
-      "Mobile-responsive design",
+      "Custom 3D Design Panel Implementation",
+      "Full Customization Capabilities",
+      "Modern Stack Integration",
+      "Collaborative Development",
     ],
-    technologies: ["React", "Firebase", "Zustand", "Socket.io", "TailwindCSS", "React Query"],
-    duration: "3 months",
-    role: "Full Stack Developer",
+    duration: "Duo Project",
+    role: "3D Designer",
   },
 ]
 
@@ -237,7 +215,7 @@ export default function ProjectsSection() {
                   </div>
                 </div>
               </Card>
-            ))}
+            ))} 
           </div>
         </div>
       </section>

@@ -15,7 +15,7 @@ export default function HeroSection() {
 
         <div className="mb-8 inline-block">
           <div className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-sm font-medium glow-border">
-            Welcome Human
+            Welcome Homosapiens
           </div>
         </div>
 
@@ -42,14 +42,14 @@ export default function HeroSection() {
             variant="outline"
             className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/5 bg-transparent glow-border"
           >
-            Download Resume
+            Download CV
           </Button>
         </div>
 
         {/* Social Links */}
         <div className="flex gap-4 justify-center">
           <a
-            href="https://github.com"
+            href="https://github.com/NurazimRoizan"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
@@ -57,7 +57,7 @@ export default function HeroSection() {
             <Github size={24} className="text-cyan-400" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/nurazimroy"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
@@ -65,7 +65,7 @@ export default function HeroSection() {
             <Linkedin size={24} className="text-cyan-400" />
           </a>
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:rnurazim@gmail.com"
             className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
           >
             <Mail size={24} className="text-cyan-400" />

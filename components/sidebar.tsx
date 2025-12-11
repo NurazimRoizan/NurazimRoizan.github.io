@@ -44,7 +44,7 @@ export default function Sidebar() {
 
             {/* Favorite Quote - Compact */}
             <p className="text-muted-foreground italic text-xs leading-relaxed mb-6 p-3 border-l-2 border-orange-500 bg-secondary/50 rounded-r">
-              "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt. -Jake Peralta"
+              "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt. -Jake Peralta B99"
             </p>
 
             {/* Contact Links - Icon + Label in rows */}
