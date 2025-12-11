@@ -1,5 +1,3 @@
-"use client"
-
 import { MapPin, Zap, Clock, TrendingUp, Mountain } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
@@ -42,7 +40,7 @@ export default async function StravaPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Navigation onNavigate={() => {}} activeSection="strava" />
+      <Navigation activeSection="strava" />
 
       <section className="pt-24 pb-20 px-4 bg-gradient-to-b from-background via-secondary/20 to-background">
         <div className="max-w-6xl mx-auto">

@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react"
 import Link from "next/link"
 
 interface NavigationProps {
-  onNavigate: (section: string) => void
+  onNavigate?: (section: string) => void
   activeSection: string
 }
 
@@ -30,7 +30,7 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
           {navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => onNavigate(item.id)}
+              onClick={() => onNavigate?.(item.id)}
               className={`transition-colors duration-300 font-medium relative group ${
                 activeSection === item.id ? "text-cyan-400" : "text-muted-foreground hover:text-foreground"
               }`}
@@ -68,7 +68,7 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
               <button
                 key={item.id}
                 onClick={() => {
-                  onNavigate(item.id)
+                  onNavigate?.(item.id)
                   setIsMenuOpen(false)
                 }}
                 className={`text-left font-medium transition-colors ${
