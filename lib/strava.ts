@@ -1,6 +1,6 @@
 // Import the static JSON file
 // Note: We use 'require' or direct import if your config allows json imports
-import stravaData from '@/data/strava.json'; 
+import stravaData from '@/src/data/strava.json'; 
 
 export interface StravaActivity {
   id: number

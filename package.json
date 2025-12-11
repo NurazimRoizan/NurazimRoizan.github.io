@@ -2,15 +2,13 @@
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://NurazimRoizan.github.io",
+  "homepage": "https://nurazimroizan.github.io",
   "scripts": {
     "prebuild": "node scripts/strava-fetch.js",
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
