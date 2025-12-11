@@ -1,146 +1,29 @@
 // Strava OAuth and API utilities for GitHub Pages hosting
 
-const STRAVA_CLIENT_ID = process.env.NEXT_PUBLIC_STRAVA_CLIENT_ID || ""
-const STRAVA_REDIRECT_URI =
-  typeof window !== "undefined" ? `${window.location.origin}/strava` : "http://localhost:3000/strava"
-
-export class StravaOAuth {
-  async getAccessToken(): Promise<string | null> {
-    // Check if token is already stored
-    const stored = localStorage.getItem("strava_access_token")
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored)
-        // Check if token is still valid (expiration buffer of 5 minutes)
-        if (parsed.expires_at * 1000 > Date.now() + 5 * 60 * 1000) {
-          return parsed.access_token
-        }
-
-        // Try to refresh if refresh token exists
-        if (parsed.refresh_token) {
-          return await this.refreshAccessToken(parsed.refresh_token)
-        }
-      } catch (e) {
-        localStorage.removeItem("strava_access_token")
-      }
-    }
-
-    // Get code from URL params
-    const params = new URLSearchParams(window.location.search)
-    const code = params.get("code")
-
-    if (code) {
-      return await this.exchangeCodeForToken(code)
-    }
-
-    return null
-  }
-
-  private async exchangeCodeForToken(code: string): Promise<string | null> {
-    try {
-      const response = await fetch("https://www.strava.com/oauth/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          client_id: STRAVA_CLIENT_ID,
-          client_secret: process.env.STRAVA_CLIENT_SECRET,
-          code: code,
-          grant_type: "authorization_code",
-        }),
-      })
-
-      if (!response.ok) throw new Error("Token exchange failed")
-
-      const data = await response.json()
-
-      // Store token and expiration
-      localStorage.setItem(
-        "strava_access_token",
-        JSON.stringify({
-          access_token: data.access_token,
-          refresh_token: data.refresh_token,
-          expires_at: data.expires_at,
-        }),
-      )
-
-      // Clean up URL
-      window.history.replaceState({}, document.title, window.location.pathname)
-
-      return data.access_token
-    } catch (error) {
-      console.error("Failed to exchange code for token:", error)
-      return null
-    }
-  }
-
-  private async refreshAccessToken(refreshToken: string): Promise<string | null> {
-    try {
-      const response = await fetch("https://www.strava.com/oauth/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          client_id: STRAVA_CLIENT_ID,
-          grant_type: "refresh_token",
-          refresh_token: refreshToken,
-        }),
-      })
-
-      if (!response.ok) throw new Error("Token refresh failed")
-
-      const data = await response.json()
-
-      localStorage.setItem(
-        "strava_access_token",
-        JSON.stringify({
-          access_token: data.access_token,
-          refresh_token: data.refresh_token,
-          expires_at: data.expires_at,
-        }),
-      )
-
-      return data.access_token
-    } catch (error) {
-      console.error("Failed to refresh token:", error)
-      localStorage.removeItem("strava_access_token")
-      return null
-    }
-  }
-
-  initiateLogin(): void {
-    const scope = "activity:read_all"
-    const authUrl =
-      `https://www.strava.com/oauth/authorize?` +
-      `client_id=${STRAVA_CLIENT_ID}&` +
-      `redirect_uri=${encodeURIComponent(STRAVA_REDIRECT_URI)}&` +
-      `response_type=code&` +
-      `scope=${scope}&` +
-      `approval_prompt=force`
-
-    window.location.href = authUrl
-  }
-
-  logout(): void {
-    localStorage.removeItem("strava_access_token")
-  }
-}
+const STRAVA_ACCESS_TOKEN = process.env.STRAVA_ACCESS_TOKEN || ""
 
 export interface StravaActivity {
   id: number
   name: string
   type: string
   distance: number
-  total_elevation_gain: number
-  moving_time: number
-  start_date: string
-  kilojoules?: number
-  calories?: number
+  elevation: number
+  duration: string
+  date: string
+  calories: number
+  image: string
 }
 
-export async function fetchStravaActivities(accessToken: string, limit = 30): Promise<StravaActivity[]> {
+export async function fetchStravaActivities(limit = 30): Promise<StravaActivity[]> {
+  if (!STRAVA_ACCESS_TOKEN) {
+    console.error("[v0] STRAVA_ACCESS_TOKEN is not set")
+    return []
+  }
+
   try {
     const response = await fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=${limit}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${STRAVA_ACCESS_TOKEN}`,
       },
     })
 
@@ -150,12 +33,11 @@ export async function fetchStravaActivities(accessToken: string, limit = 30): Pr
 
     const activities = await response.json()
 
-    // Map Strava activity type to readable format
     return activities.map((activity: any) => ({
       id: activity.id,
       name: activity.name,
       type: mapActivityType(activity.type),
-      distance: activity.distance / 1000, // Convert to km
+      distance: activity.distance / 1000,
       elevation: activity.total_elevation_gain,
       duration: formatDuration(activity.moving_time),
       date: formatDate(activity.start_date),
@@ -163,7 +45,7 @@ export async function fetchStravaActivities(accessToken: string, limit = 30): Pr
       image: "/strava-activity.jpg",
     }))
   } catch (error) {
-    console.error("Error fetching Strava activities:", error)
+    console.error("[v0] Error fetching Strava activities:", error)
     return []
   }
 }

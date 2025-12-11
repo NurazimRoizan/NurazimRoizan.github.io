@@ -1,11 +1,10 @@
 "use client"
 
-import { MapPin, Zap, Clock, TrendingUp, Mountain, LogOut } from "lucide-react"
+import { MapPin, Zap, Clock, TrendingUp, Mountain } from "lucide-react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { Card } from "@/components/ui/card"
-import { useEffect, useState } from "react"
-import { StravaOAuth, fetchStravaActivities, type StravaActivity } from "@/lib/strava"
+import { fetchStravaActivities } from "@/lib/strava"
 
 interface ActivityStats {
   label: string
@@ -26,72 +25,20 @@ const favoriteHike = {
   stravaUrl: "https://www.strava.com/activities/YOUR_ACTIVITY_ID",
 }
 
-export default function StravaPage() {
-  const [activities, setActivities] = useState<StravaActivity[]>([])
-  const [activityStats, setActivityStats] = useState<ActivityStats[]>([])
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default async function StravaPage() {
+  const activities = await fetchStravaActivities(30)
 
-  useEffect(() => {
-    const loadActivities = async () => {
-      try {
-        const oauth = new StravaOAuth()
-        const token = await oauth.getAccessToken()
+  // Calculate stats from real activities
+  const totalDistance = activities.reduce((sum, a) => sum + a.distance, 0)
+  const totalElevation = activities.reduce((sum, a) => sum + a.elevation, 0)
+  const totalCalories = activities.reduce((sum, a) => sum + a.calories, 0)
 
-        if (!token) {
-          setIsAuthenticated(false)
-          setLoading(false)
-          return
-        }
-
-        setIsAuthenticated(true)
-        const fetchedActivities = await fetchStravaActivities(token)
-
-        if (fetchedActivities.length === 0) {
-          setError("No activities found. Make sure your Strava account has activities to share.")
-          setLoading(false)
-          return
-        }
-
-        setActivities(fetchedActivities)
-
-        // Calculate stats
-        const totalDistance = fetchedActivities.reduce((sum, a) => sum + a.distance, 0)
-        const totalElevation = fetchedActivities.reduce((sum, a) => sum + a.elevation, 0)
-        const totalCalories = fetchedActivities.reduce((sum, a) => sum + a.calories, 0)
-
-        setActivityStats([
-          { label: "Total Activities", value: fetchedActivities.length.toString(), icon: TrendingUp },
-          { label: "Total Distance", value: `${totalDistance.toFixed(1)} km`, icon: MapPin },
-          { label: "Total Elevation", value: `${totalElevation.toFixed(0)} m`, icon: Mountain },
-          { label: "Total Effort", value: `${totalCalories.toFixed(0)} kJ`, icon: Clock },
-        ])
-
-        setError(null)
-      } catch (err) {
-        console.error("[v0] Error loading activities:", err)
-        setError("Failed to load your Strava activities. Please try again.")
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadActivities()
-  }, [])
-
-  const handleConnect = () => {
-    const oauth = new StravaOAuth()
-    oauth.initiateLogin()
-  }
-
-  const handleLogout = () => {
-    const oauth = new StravaOAuth()
-    oauth.logout()
-    setIsAuthenticated(false)
-    setActivities([])
-    setActivityStats([])
-  }
+  const activityStats: ActivityStats[] = [
+    { label: "Total Activities", value: activities.length.toString(), icon: TrendingUp },
+    { label: "Total Distance", value: `${totalDistance.toFixed(1)} km`, icon: MapPin },
+    { label: "Total Elevation", value: `${totalElevation.toFixed(0)} m`, icon: Mountain },
+    { label: "Total Effort", value: `${totalCalories.toFixed(0)} kJ`, icon: Clock },
+  ]
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -109,50 +56,10 @@ export default function StravaPage() {
               Documenting my outdoor adventures, from mountain hikes to cycling routes and runs through scenic
               landscapes.
             </p>
-
-            {isAuthenticated && (
-              <button
-                onClick={handleLogout}
-                className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-400/20 transition-colors"
-              >
-                <LogOut size={16} />
-                Logout from Strava
-              </button>
-            )}
           </div>
 
-          {/* Authentication Prompt */}
-          {!isAuthenticated && !loading && (
-            <Card className="mb-16 p-8 border-cyan-400/20 bg-secondary/30 text-center">
-              <h2 className="text-2xl font-bold mb-4">Connect Your Strava Account</h2>
-              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                Connect your Strava account to display your real activities, including distance, elevation, duration,
-                and more. Your data stays secure and you can disconnect anytime.
-              </p>
-              <button
-                onClick={handleConnect}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold border border-orange-400/50 hover:border-orange-400 glow-orange"
-              >
-                <Zap size={20} />
-                Connect Strava Account
-              </button>
-            </Card>
-          )}
-
-          {loading && (
-            <Card className="mb-16 p-8 border-cyan-400/20 bg-secondary/30 text-center">
-              <p className="text-muted-foreground animate-pulse">Loading your Strava activities...</p>
-            </Card>
-          )}
-
-          {error && (
-            <Card className="mb-16 p-8 border-red-400/20 bg-red-500/10">
-              <p className="text-red-400 text-center">{error}</p>
-            </Card>
-          )}
-
           {/* Stats Grid */}
-          {isAuthenticated && activityStats.length > 0 && (
+          {activities.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
               {activityStats.map((stat) => {
                 const Icon = stat.icon
@@ -170,6 +77,16 @@ export default function StravaPage() {
                 )
               })}
             </div>
+          )}
+
+          {/* Error State */}
+          {activities.length === 0 && (
+            <Card className="mb-16 p-8 border-red-400/20 bg-red-500/10">
+              <p className="text-red-400 text-center">
+                Failed to load Strava activities. Please check if your STRAVA_ACCESS_TOKEN environment variable is
+                correctly set.
+              </p>
+            </Card>
           )}
 
           {/* Favorite Hike Spotlight */}
@@ -236,57 +153,55 @@ export default function StravaPage() {
           </div>
 
           {/* Activities Grid */}
-          {isAuthenticated && activities.length > 0 && (
+          {activities.length > 0 && (
             <div>
               <h2 className="text-2xl font-bold mb-6">Recent Activities</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {activities.map((activity) => (
-                  <Card
+                  <a
                     key={activity.id}
-                    className="group overflow-hidden border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/60 transition-all duration-300"
+                    href={`https://www.strava.com/activities/${activity.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {/* Activity Image */}
-                    <div className="relative overflow-hidden h-40 bg-secondary">
-                      <img
-                        src={activity.image || "/placeholder.svg"}
-                        alt={activity.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-
-                    {/* Activity Info */}
-                    <div className="p-5">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-bold group-hover:text-cyan-400 transition-colors flex-1 truncate">
-                          {activity.name}
-                        </h3>
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-orange-500/20 text-orange-400 border border-orange-400/30 whitespace-nowrap ml-2">
-                          {activity.type}
-                        </span>
-                      </div>
-
-                      <p className="text-xs text-muted-foreground mb-4">{activity.date}</p>
-
-                      <div className="grid grid-cols-2 gap-3 text-sm">
-                        <div className="flex items-center gap-2">
-                          <MapPin size={16} className="text-cyan-400" />
-                          <span className="text-muted-foreground">{activity.distance.toFixed(1)} km</span>
+                    <Card className="group overflow-hidden border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 h-full cursor-pointer">
+                      <div className="p-5 h-full flex flex-col">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-lg font-bold group-hover:text-cyan-400 transition-colors flex-1 truncate">
+                            {activity.name}
+                          </h3>
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-orange-500/20 text-orange-400 border border-orange-400/30 whitespace-nowrap ml-2">
+                            {activity.type}
+                          </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Mountain size={16} className="text-cyan-400" />
-                          <span className="text-muted-foreground">{Math.round(activity.elevation)} m</span>
+
+                        <p className="text-xs text-muted-foreground mb-4">{activity.date}</p>
+
+                        <div className="grid grid-cols-2 gap-3 text-sm flex-1">
+                          <div className="flex items-center gap-2">
+                            <MapPin size={16} className="text-cyan-400" />
+                            <span className="text-muted-foreground">{activity.distance.toFixed(1)} km</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Mountain size={16} className="text-cyan-400" />
+                            <span className="text-muted-foreground">{Math.round(activity.elevation)} m</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock size={16} className="text-cyan-400" />
+                            <span className="text-muted-foreground">{activity.duration}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Zap size={16} className="text-orange-500" />
+                            <span className="text-muted-foreground">{Math.round(activity.calories)} kJ</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Clock size={16} className="text-cyan-400" />
-                          <span className="text-muted-foreground">{activity.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Zap size={16} className="text-orange-500" />
-                          <span className="text-muted-foreground">{Math.round(activity.calories)} kJ</span>
+
+                        <div className="mt-4 pt-4 border-t border-cyan-400/10">
+                          <p className="text-xs text-cyan-400 font-semibold hover:text-cyan-300">View on Strava →</p>
                         </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </a>
                 ))}
               </div>
             </div>
