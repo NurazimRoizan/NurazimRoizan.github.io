@@ -42,7 +42,12 @@ export default function HeroSection() {
             variant="outline"
             className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/5 bg-transparent glow-border"
           >
+          <a 
+            href="/Nurazim_Roizan_CV.pdf" 
+            download="Nurazim_Roizan_CV.pdf"
+          >
             Download CV
+          </a>
           </Button>
         </div>
 
