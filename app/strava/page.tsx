@@ -35,7 +35,7 @@ export default async function StravaPage() {
     { label: "Total Activities", value: activities.length.toString(), icon: TrendingUp },
     { label: "Total Distance", value: `${totalDistance.toFixed(1)} km`, icon: MapPin },
     { label: "Total Elevation", value: `${totalElevation.toFixed(0)} m`, icon: Mountain },
-    { label: "Total Effort", value: `${totalCalories.toFixed(0)} kJ`, icon: Clock },
+    { label: "Total Effort", value: `Not Recorded`, icon: Clock },
   ]
 
   return (

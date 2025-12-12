@@ -10,7 +10,9 @@ interface ProjectModalProps {
     id: number
     title: string
     description: string
-    fullDescription: string
+    overview: string
+    workingPrinciple?: string
+    lessons: string
     tags: string[]
     image: string
     github?: string
@@ -112,8 +114,13 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
             {/* Full Description */}
             <div className="mb-6">
+              <h3 className="text-lg font-bold mb-2">Project Description</h3>
+              <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+            </div>
+            
+            <div className="mb-6">
               <h3 className="text-lg font-bold mb-2">Overview</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.fullDescription}</p>
+              <p className="text-muted-foreground leading-relaxed">{project.overview}</p>
             </div>
 
             {/* Key Features */}
@@ -127,6 +134,18 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="mb-6">
+              {project.workingPrinciple && (    
+                <h3 className="text-lg font-bold mb-2">The Fun Part: How It Works</h3>
+              )}
+              <p className="text-muted-foreground leading-relaxed">{project.workingPrinciple}</p>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-lg font-bold mb-2">What I Learned</h3>
+              <p className="text-muted-foreground leading-relaxed">{project.lessons}</p>
             </div>
 
             {/* All Tags */}
