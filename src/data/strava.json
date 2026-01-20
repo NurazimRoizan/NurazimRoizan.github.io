@@ -1,5 +1,16 @@
 [
   {
+    "id": 17065929593,
+    "name": "Pulau Intan Hiking and Teluk Monyet Uu Uu Aa Aa",
+    "type": "Hike",
+    "distance": 4.1373,
+    "elevation": 197.2,
+    "duration": "1h 15m",
+    "date": "Jan 16, 2026",
+    "calories": 0,
+    "image": "/strava-activity.jpg"
+  },
+  {
     "id": 14966197218,
     "name": "Last Parkwood",
     "type": "Walk",
@@ -315,17 +326,6 @@
     "elevation": 144,
     "duration": "1h 12m",
     "date": "Sep 4, 2023",
-    "calories": 0,
-    "image": "/strava-activity.jpg"
-  },
-  {
-    "id": 9484031580,
-    "name": "Stanage Edge ",
-    "type": "Hike",
-    "distance": 11.4167,
-    "elevation": 356.3,
-    "duration": "3h 11m",
-    "date": "Jul 19, 2023",
     "calories": 0,
     "image": "/strava-activity.jpg"
   }
