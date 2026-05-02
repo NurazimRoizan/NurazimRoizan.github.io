@@ -24,6 +24,15 @@ interface Education {
 const experiences: Experience[] = [
   {
     id: 1,
+    title: "Front-End Developer",
+    company: "Softinn Solutions (Hotel SaaS Provider)",
+    period: "Feb 2026 - Present",
+    description:
+      "Developed and maintained a comprehensive suite of hospitality SaaS applications (Booking Engine, PMS, CMS, and Portal) utilizing Angular, Bootstrap, and Metronic with C#, leveraging deep expertise in hotel operations to deliver highly responsive, user-centric solutions that resolve complex operational bottlenecks.",
+    skills: ["Angular", "C#", "TypeScript", "Firebase", "Git", "Hotel Operations", "Hotel SaaS"],
+  },
+  {
+    id: 2,
     title: "Software Hut",
     company: "",
     period: "2025",
@@ -32,7 +41,7 @@ const experiences: Experience[] = [
     skills: ["Ruby on Rails", "Full-stack", "Agile", "SRS", "Git"],
   },
   {
-    id: 2,
+    id: 3,
     title: "Engineering You’re Hired (EYH)",
     company: "",
     period: "2024",
@@ -41,7 +50,7 @@ const experiences: Experience[] = [
     skills: ["Teamwork", "Engineering Council standards (AHEP)", "UKSPEC"],
   },
   {
-    id: 3,
+    id: 4,
     title: "Global Engineering Challenge (GEC)",
     company: "",
     period: "2023",
@@ -54,7 +63,7 @@ const experiences: Experience[] = [
 const education: Education[] = [
   {
     id: 1,
-    degree: "Bachelor of Computer Science with Honours",
+    degree: "BSc in Computer Science with Honours",
     school: "University of Sheffield",
     year: "2025",
     details: "Relevant Modules: Advanced Algorithm, 3D Computer Graphics, Cybersecurity in Action, The Internet of Things, Software Testing and Analysis, Robotics, Logic in Computer Science",
@@ -77,6 +86,8 @@ const education: Education[] = [
 
 const skills = [
   "JavaScript/TypeScript",
+  "Angular",
+  "C#",
   "React",
   "Next.js",
   "Node.js",
@@ -84,7 +95,7 @@ const skills = [
   "Ruby on Rails",
   "Tailwind CSS",
   "Git",
-  "Docker",
+  "Firebase",
   "Python",
   "C++",
   "Haskell",
@@ -98,7 +109,7 @@ export default function CVSection() {
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Professional Background</h2>
           <p className="text-lg text-muted-foreground">
-            My journey in software development and key achievements throughout my university.
+            My journey in software development and key achievements throughout my university and career.
           </p>
         </div>
 
