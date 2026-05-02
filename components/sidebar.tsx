@@ -40,7 +40,7 @@ export default function Sidebar() {
             <h1 className="text-xl font-bold mb-1">Nurazim Roizan</h1>
 
             {/* Job Title */}
-            <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm mb-5">University of Sheffield Graduate in Computer Science</p>
+            <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm mb-5">96% Front-End Developer, 4% Dark Mode Enthusiast.</p>
 
             {/* Favorite Quote - Compact */}
             <p className="text-muted-foreground italic text-xs leading-relaxed mb-6 p-3 border-l-2 border-orange-500 bg-secondary/50 rounded-r">
@@ -72,8 +72,8 @@ export default function Sidebar() {
 
         {/* Footer */}
         <div className="text-center text-xs text-muted-foreground">
-          <p>© 2025 Nurazim Roizan</p>
-          <p className="mt-1">Crafted with passion</p>
+          <p>© 2026 Nurazim Roizan</p>
+          <p className="mt-1">Crafted with passion and cheese</p>
         </div>
       </aside>
 
@@ -93,7 +93,7 @@ export default function Sidebar() {
             {/* Name */}
             <div>
               <h2 className="text-lg font-bold">Nurazim Roizan</h2>
-              <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm">Full Stack Developer</p>
+              <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm">96% Front-End Developer, 4% Dark Mode Enthusiast.</p>
             </div>
 
             {/* Favorite Quote */}
@@ -124,7 +124,7 @@ export default function Sidebar() {
 
             {/* Footer */}
             <div className="text-center text-xs text-muted-foreground pt-3 border-t border-[#FF8C00]/10 dark:border-cyan-400/10">
-              <p>© 2025 Nurazim Roizan</p>
+              <p>© 2026 Nurazim Roizan</p>
             </div>
           </div>
         </div>

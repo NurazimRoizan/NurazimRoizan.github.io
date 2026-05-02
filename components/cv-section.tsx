@@ -34,7 +34,7 @@ const experiences: Experience[] = [
   {
     id: 2,
     title: "Software Hut",
-    company: "",
+    company: "University of Sheffield",
     period: "2025",
     description:
       "Developed a client-facing web application with Ruby on Rails as part of a competitive group project. The platform was designed to facilitate the online sale of train parts and spares, showcasing the ability to engineer a functional software system from conception to delivery.",
@@ -43,7 +43,7 @@ const experiences: Experience[] = [
   {
     id: 3,
     title: "Engineering You’re Hired (EYH)",
-    company: "",
+    company: "University of Sheffield",
     period: "2024",
     description:
       "Collaborated within a multi-disciplinary, multi-cultural team to address a complex engineering challenge. This culminated in a conceptual design for a Smart Office, proposing technological solutions to improve environmental sustainability and employee health.",
@@ -52,7 +52,7 @@ const experiences: Experience[] = [
   {
     id: 4,
     title: "Global Engineering Challenge (GEC)",
-    company: "",
+    company: "University of Sheffield",
     period: "2023",
     description:
       "Led a multi-disciplinary team in a week-long challenge to address the repurposing of derelict land and historic buildings in Govan, Glasgow. Developed a conceptual design to create multi-use spaces that provided significant social and community benefits. This intensive program developed critical transferable skills for real-life engineering projects.",

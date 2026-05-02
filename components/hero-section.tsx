@@ -15,7 +15,7 @@ export default function HeroSection() {
 
         <div className="mb-8 inline-block">
           <div className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-sm font-medium glow-border">
-            Welcome Homosapiens
+            Welcome Humans
           </div>
         </div>
 
