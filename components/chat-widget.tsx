@@ -21,7 +21,11 @@ export default function ChatWidget() {
     
     const userMessage = input
     setInput("") // clear immediately for better UX
-    await append({ role: "user", content: userMessage })
+    await append({ 
+      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(7),
+      role: "user", 
+      content: userMessage 
+    })
   }
 
   return (
