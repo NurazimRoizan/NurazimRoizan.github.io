@@ -16,7 +16,7 @@ Keep your answers concise, friendly, and relevant to a digital interview context
 [Insert your personal context, resume details, and background here]
 `
 
-    const result = streamText({
+    const result = await streamText({
       model: google('gemini-2.5-flash'), // Using Gemini 2.5 Flash for fast, cost-effective responses
       system: systemPrompt,
       messages,
