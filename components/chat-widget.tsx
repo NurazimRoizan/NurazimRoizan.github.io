@@ -6,27 +6,15 @@ import { MessageCircle, X, Send, User, Bot } from "lucide-react"
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const [input, setInput] = useState("")
-  const { messages, append, isLoading } = useChat()
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    api: "/api/chat",
+  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || isLoading) return
-    
-    const userMessage = input
-    setInput("") // clear immediately for better UX
-    await append({ 
-      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(7),
-      role: "user", 
-      content: userMessage 
-    })
-  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -54,6 +42,12 @@ export default function ChatWidget() {
               <div className="text-center text-zinc-500 mt-10">
                 <p className="text-sm">Hi! I'm an AI assistant.</p>
                 <p className="text-sm">Ask me anything about my experience and skills.</p>
+              </div>
+            )}
+
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500/50 text-red-400 rounded-xl text-sm mb-4">
+                Error connecting to AI: {error.message || "Please check your API key and server logs."}
               </div>
             )}
             
@@ -100,17 +94,18 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
+          <form onSubmit={handleSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
             <div className="relative flex items-center">
               <input
+                name="prompt"
                 className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-zinc-500 transition-all"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
+                value={input || ""}
+                onChange={handleInputChange}
                 placeholder="Type your message..."
               />
               <button
                 type="submit"
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !input || !input.trim()}
                 className="absolute right-2 p-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
