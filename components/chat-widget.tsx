@@ -102,7 +102,7 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <div className="text-center text-zinc-500 mt-10 px-4">
                 <p className="text-sm font-medium text-zinc-300">Welcome to my digital interview!</p>
-                <p className="text-sm mt-2">I'm Nurazim's digital clone. Feel free to ask me anything about my front-end experience, projects, or background.</p>
+                <p className="text-sm mt-2">I'm Nurazim's digital clone. Feel free to ask me anything about my life experience, projects, or background.</p>
               </div>
             )}
 
