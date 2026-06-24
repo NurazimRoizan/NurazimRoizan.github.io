@@ -23,9 +23,9 @@ Keep your answers concise, friendly, and relevant to a digital interview context
     })
 
     return result.toDataStreamResponse()
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in chat API route:', error)
-    return new Response(JSON.stringify({ error: 'Failed to process chat request' }), {
+    return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     })
