@@ -39,15 +39,16 @@ export default function HeroSection() {
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button
+            asChild
             variant="outline"
-            className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/5 bg-transparent glow-border hover:scale-105 active:scale-95 transition-all"
+            className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/10 hover:text-cyan-400 bg-transparent glow-border hover:scale-105 active:scale-95 transition-all"
           >
-          <a 
-            href="/Nurazim_Roizan_CV.pdf" 
-            download="Nurazim_Roizan_CV.pdf"
-          >
-            Download CV
-          </a>
+            <a 
+              href="/Nurazim_Roizan_CV.pdf" 
+              download="Nurazim_Roizan_CV.pdf"
+            >
+              Download CV
+            </a>
           </Button>
         </div>
 
