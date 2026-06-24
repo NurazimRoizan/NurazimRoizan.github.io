@@ -90,13 +90,13 @@ export default function ChatWidget() {
             <div className="relative flex items-center">
               <input
                 className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-zinc-500 transition-all"
-                value={input}
+                value={input || ""}
                 onChange={handleInputChange}
                 placeholder="Type your message..."
               />
               <button
                 type="submit"
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !input || !input.trim()}
                 className="absolute right-2 p-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
