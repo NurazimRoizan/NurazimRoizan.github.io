@@ -6,13 +6,23 @@ import { MessageCircle, X, Send, User, Bot } from "lucide-react"
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat()
+  const [input, setInput] = useState("")
+  const { messages, append, isLoading } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+    
+    const userMessage = input
+    setInput("") // clear immediately for better UX
+    await append({ role: "user", content: userMessage })
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -86,17 +96,17 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
+          <form onSubmit={onSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
             <div className="relative flex items-center">
               <input
                 className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-zinc-500 transition-all"
-                value={input || ""}
-                onChange={handleInputChange}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
               />
               <button
                 type="submit"
-                disabled={isLoading || !input || !input.trim()}
+                disabled={isLoading || !input.trim()}
                 className="absolute right-2 p-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
