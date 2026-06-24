@@ -23,6 +23,48 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 8,
+    title: "Mata - Peer-to-Peer Security Camera",
+    description: "A Progressive Web App (PWA) that turns old smartphones into peer-to-peer security cameras using WebRTC with motion detection and push notifications.",
+    overview: "Mata is a Progressive Web App (PWA) designed to repurpose old smartphones into a secure, peer-to-peer security camera system. It utilizes WebRTC for direct device-to-device video streaming, ensuring privacy by avoiding central servers.",
+    workingPrinciple: "The application operates in two distinct modes: Camera and Viewer. The Camera mode leverages HTML5 Canvas to scan video frames for motion. Upon detecting movement, it broadcasts an alert via WebRTC Data Channels, which triggers a native Push Notification on the Viewer device. This creates a highly responsive, real-time security alert system.",
+    lessons: "This project provided deep insights into WebRTC for peer-to-peer communication and real-time video streaming. It also highlighted the power of Progressive Web Apps (PWAs) in delivering native-like features such as push notifications and hardware access (camera) directly from the browser without requiring installation.",
+    tags: ["React 19", "Vite", "WebRTC", "PeerJS", "PWA"],
+    image: "/placeholder.svg",
+    github: "https://github.com/NurazimRoizan/Mata",
+    live: "https://nurazimroizan.github.io/Mata/",
+    features: [
+      "Peer-to-Peer WebRTC Streaming",
+      "Motion Detection via HTML5 Canvas",
+      "Native Push Notifications",
+      "Progressive Web App (PWA) Architecture",
+      "Neobrutalist UI Design"
+    ],
+    duration: "Hobby Project",
+    role: "Author",
+  },
+  {
+    id: 7,
+    title: "The Bench - App Idea Vault",
+    description: "A highly secure, somewhat brutalist, and extremely private Progressive Web App (PWA) for tracking and categorizing app ideas.",
+    overview: "The Bench is a PWA designed as a vault for app ideas. It moves beyond simple text files or notebooks, allowing users to categorize, track status, and define tech stacks for their concepts in a highly organized and private environment.",
+    workingPrinciple: "It features a Neo-Brutalist aesthetic and operates as a standalone Progressive Web App. Users can declare the tools they intend to use, categorize ideas, and track their metamorphosis from concept to shipped product.",
+    lessons: "Building The Bench emphasized the importance of ruthless organization and privacy in personal project management. The Neo-Brutalist design approach also served as an exploration into non-traditional, bold UI/UX paradigms.",
+    tags: ["Next.js", "PWA", "Brutalist UI"],
+    image: "/placeholder.svg",
+    github: "https://github.com/NurazimRoizan/The-Bench",
+    live: "https://404.jimiroi.com",
+    features: [
+      "Absolute Privacy and Secure Login",
+      "Idea Categorization and Status Tracking",
+      "Tech Stack Sandbox/Declaration",
+      "Neo-Brutalist Aesthetics",
+      "Progressive Web App (PWA)"
+    ],
+    duration: "Hobby Project",
+    role: "Author",
+  },
+  {
     id: 1,
     title: "Dissertation Project: Graph Theory Visualization Tool",
     description: "This project involves developing an interactive interface to visualize the bijective k-Pebble game and the k-Weisfeiler- Leman algorithm, enabling users to explore and understand graph isomorphism – a fundamental problem in computer science with applications in areas such as network analysis and pattern recognition.",
@@ -221,6 +263,18 @@ export default function ProjectsSection() {
                 </div>
               </Card>
             ))} 
+          </div>
+
+          <div className="mt-16 text-center flex justify-center">
+            <a 
+              href="https://404.jimiroi.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 font-bold text-lg glow-border group"
+            >
+              <span>Explore My Creative Portfolio</span>
+              <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
         </div>
       </section>
