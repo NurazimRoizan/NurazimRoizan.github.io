@@ -63,25 +63,11 @@ export default function ChatWidget() {
         const { done, value } = await reader.read()
         if (done) break
         
-        buffer += decoder.decode(value, { stream: true })
-        const lines = buffer.split('\n')
-        
-        // Keep the last partial line in the buffer
-        buffer = lines.pop() || ""
-        
-        for (const line of lines) {
-          if (line.startsWith('0:')) {
-            try {
-              const textChunk = JSON.parse(line.slice(2))
-              assistantContent += textChunk
-              setMessages((prev) => 
-                prev.map((m) => m.id === assistantId ? { ...m, content: assistantContent } : m)
-              )
-            } catch (err) {
-              console.error("Failed to parse stream chunk", line)
-            }
-          }
-        }
+        const chunk = decoder.decode(value, { stream: true })
+        assistantContent += chunk
+        setMessages((prev) => 
+          prev.map((m) => m.id === assistantId ? { ...m, content: assistantContent } : m)
+        )
       }
     } catch (err: any) {
       console.error(err)

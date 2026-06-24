@@ -22,7 +22,7 @@ Keep your answers concise, friendly, and relevant to a digital interview context
       messages,
     })
 
-    return result.toDataStreamResponse()
+    return result.toTextStreamResponse()
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
