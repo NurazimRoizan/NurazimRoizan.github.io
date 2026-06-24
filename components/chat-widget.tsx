@@ -100,9 +100,9 @@ export default function ChatWidget() {
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
-              <div className="text-center text-zinc-500 mt-10">
-                <p className="text-sm">Hi! I'm an AI assistant.</p>
-                <p className="text-sm">Ask me anything about my experience and skills.</p>
+              <div className="text-center text-zinc-500 mt-10 px-4">
+                <p className="text-sm font-medium text-zinc-300">Welcome to my digital interview!</p>
+                <p className="text-sm mt-2">I'm Nurazim's digital clone. Feel free to ask me anything about my front-end experience, projects, or background.</p>
               </div>
             )}
 
