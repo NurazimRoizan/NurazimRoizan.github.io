@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import Sidebar from "@/components/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
+import ChatWidget from "@/components/chat-widget"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -49,6 +50,7 @@ export default function RootLayout({
           <Sidebar />
           {children}
           <Analytics />
+          <ChatWidget />
         </ThemeProvider>
       </body>
     </html>
