@@ -33,14 +33,14 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-6 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-600 hover:to-cyan-500 text-black font-semibold rounded-lg flex items-center justify-center gap-2 group shadow-lg glow-border-strong"
+            className="px-8 py-6 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-600 hover:to-cyan-500 text-black font-semibold rounded-lg flex items-center justify-center gap-2 group shadow-lg glow-border-strong hover:scale-105 active:scale-95 transition-all"
           >
             View My Work
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button
             variant="outline"
-            className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/5 bg-transparent glow-border"
+            className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/5 bg-transparent glow-border hover:scale-105 active:scale-95 transition-all"
           >
           <a 
             href="/Nurazim_Roizan_CV.pdf" 
@@ -57,7 +57,7 @@ export default function HeroSection() {
             href="https://github.com/NurazimRoizan"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
+            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
           >
             <Github size={24} className="text-cyan-400" />
           </a>
@@ -65,13 +65,13 @@ export default function HeroSection() {
             href="https://www.linkedin.com/in/nurazimroy"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
+            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
           >
             <Linkedin size={24} className="text-cyan-400" />
           </a>
           <a
             href="mailto:rnurazim@gmail.com"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border"
+            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
           >
             <Mail size={24} className="text-cyan-400" />
           </a>

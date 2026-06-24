@@ -180,7 +180,7 @@ export default function ChatWidget() {
         onClick={() => setIsOpen(!isOpen)}
         className={`${
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
-        } transition-all duration-300 bg-cyan-400 hover:bg-cyan-300 text-zinc-950 px-5 py-3.5 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] flex items-center gap-2 font-bold text-sm`}
+        } transition-all duration-300 bg-cyan-400 hover:bg-cyan-300 text-zinc-950 px-5 py-3.5 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:scale-105 hover:-translate-y-1 active:scale-95 flex items-center gap-2 font-bold text-sm`}
       >
         <MessageCircle className="w-5 h-5" />
         Interview me digitally

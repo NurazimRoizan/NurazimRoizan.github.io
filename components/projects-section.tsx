@@ -203,7 +203,7 @@ export default function ProjectsSection() {
               <Card
                 key={project.id}
                 onClick={() => handleProjectClick(project)}
-                className="group overflow-hidden border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 backdrop-blur-sm glow-border cursor-pointer"
+                className="group overflow-hidden border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 backdrop-blur-sm glow-border cursor-pointer hover:-translate-y-2"
               >
                 {/* Project Image */}
                 <div className="relative overflow-hidden h-48 bg-secondary">
@@ -270,7 +270,7 @@ export default function ProjectsSection() {
               href="https://404.jimiroi.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 font-bold text-lg glow-border group"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 font-bold text-lg glow-border group hover:scale-105 active:scale-95"
             >
               <span>Explore My Creative Portfolio</span>
               <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
