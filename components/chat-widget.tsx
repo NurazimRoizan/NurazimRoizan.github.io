@@ -1,20 +1,95 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from "react"
-import { useChat } from "@ai-sdk/react"
 import { MessageCircle, X, Send, User, Bot } from "lucide-react"
+
+type Message = {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
-    api: "/api/chat",
-  })
+  const [input, setInput] = useState("")
+  const [messages, setMessages] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+    
+    const userMessage: Message = {
+      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
+      role: "user",
+      content: input.trim()
+    }
+    
+    setInput("") // clear immediately for better UX
+    setMessages((prev) => [...prev, userMessage])
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, userMessage] })
+      })
+
+      if (!res.ok) {
+        throw new Error(await res.text())
+      }
+
+      const reader = res.body?.getReader()
+      if (!reader) throw new Error("Stream not available")
+
+      const decoder = new TextDecoder()
+      const assistantId = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString()
+      let assistantContent = ""
+      
+      setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "" }])
+
+      let buffer = ""
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        
+        // Keep the last partial line in the buffer
+        buffer = lines.pop() || ""
+        
+        for (const line of lines) {
+          if (line.startsWith('0:')) {
+            try {
+              const textChunk = JSON.parse(line.slice(2))
+              assistantContent += textChunk
+              setMessages((prev) => 
+                prev.map((m) => m.id === assistantId ? { ...m, content: assistantContent } : m)
+              )
+            } catch (err) {
+              console.error("Failed to parse stream chunk", line)
+            }
+          }
+        }
+      }
+    } catch (err: any) {
+      console.error(err)
+      setError(err.message || "Failed to fetch AI response")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -47,7 +122,7 @@ export default function ChatWidget() {
 
             {error && (
               <div className="p-3 bg-red-500/10 border border-red-500/50 text-red-400 rounded-xl text-sm mb-4">
-                Error connecting to AI: {error.message || "Please check your API key and server logs."}
+                Error connecting to AI: {error}
               </div>
             )}
             
@@ -94,18 +169,17 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
+          <form onSubmit={onSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
             <div className="relative flex items-center">
               <input
-                name="prompt"
                 className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-zinc-500 transition-all"
-                value={input || ""}
-                onChange={handleInputChange}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
               />
               <button
                 type="submit"
-                disabled={isLoading || !input || !input.trim()}
+                disabled={isLoading || !input.trim()}
                 className="absolute right-2 p-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
