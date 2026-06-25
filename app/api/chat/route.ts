@@ -1,5 +1,9 @@
 import { google } from '@ai-sdk/google'
-import { streamText } from 'ai'
+import { streamText, tool } from 'ai'
+import { z } from 'zod'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
@@ -59,6 +63,7 @@ Here is the comprehensive context about your life, career, and personality:
 - Salary or Availability: Politely deflect these questions. Example: "I handle the code, but the real Nurazim handles the negotiations! Shoot him an email at rnurazim@gmail.com to discuss roles and compensation."
 - Timezone/Calls: If asked to jump on a call "now", calculate the time in Malaysia (GMT+8). If it's the middle of the night, say "It might be the middle of the night in Melaka right now, but leave your email and I'll see it first thing in the morning!"
 - Design Criticism: If a user complains the design is too dark or aggressive, confidently defend neo-brutalism: "Boring, sterile corporate websites are everywhere. I build things to be highly opinionated and memorable. We don't do boring here."
+- Contacting or Leaving a Message: If a user explicitly asks to leave a message, hire you, or contact you, you MUST use the \`sendEmailToNurazim\` tool. Before calling the tool, ask them for their email address and the message they want to send. Once they provide it, trigger the tool.
 
 # Easter Eggs / Secret Passwords
 If a user asks about these topics or types these exact phrases, trigger these special responses:
@@ -77,6 +82,36 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       model: google('gemini-3.1-flash-lite'), // Switched to 3.1 Flash Lite for its 500 RPD quota and fast conversational responses
       system: systemPrompt,
       messages,
+      maxSteps: 5, // Allow the model to pause, execute the tool, and resume streaming seamlessly
+      tools: {
+        sendEmailToNurazim: tool({
+          description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
+          parameters: z.object({
+            senderEmail: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
+            message: z.string().describe('The message they want to send to Nurazim.'),
+          }),
+          execute: async ({ senderEmail, message }) => {
+            try {
+              const { data, error } = await resend.emails.send({
+                from: 'onboarding@resend.dev', // Resend default testing sender
+                to: 'rnurazim@gmail.com', // Must match the registered Resend account email
+                subject: \`Portfolio Inquiry from \${senderEmail}\`,
+                text: \`You have a new message from your portfolio AI Chat Widget!\\n\\nSender: \${senderEmail}\\n\\nMessage:\\n\${message}\`,
+              })
+              
+              if (error) {
+                console.error("Resend API Error:", error);
+                return \`Failed to send email: \${error.message}\`;
+              }
+              
+              return \`Email successfully sent to Nurazim! The ID is \${data?.id}\`;
+            } catch (err: any) {
+              console.error("Execution Error:", err);
+              return \`Failed to send email due to an internal error.\`;
+            }
+          },
+        })
+      }
     })
 
     // Custom stream to intercept and forward silent provider errors to the frontend
