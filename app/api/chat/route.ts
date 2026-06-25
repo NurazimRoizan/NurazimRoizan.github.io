@@ -82,7 +82,6 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       model: google('gemini-3.1-flash-lite'), // Switched to 3.1 Flash Lite for its 500 RPD quota and fast conversational responses
       system: systemPrompt,
       messages,
-      maxSteps: 5, // Allow the model to pause, execute the tool, and resume streaming seamlessly
       tools: {
         sendEmailToNurazim: tool({
           description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
@@ -90,38 +89,75 @@ If a user asks about these topics or types these exact phrases, trigger these sp
             email: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
             content: z.string().describe('The message they want to send to Nurazim.'),
           }),
-          execute: async ({ email, content }) => {
-            console.log("TOOL EXECUTED WITH ARGS:", { email, content });
-            
-            // Failsafe check
-            if (!email || email === "undefined" || !content || content === "undefined") {
-              return "Failed to send email. The provided email or message content was invalid or undefined. Ask the user to provide them again.";
-            }
-
-            try {
-              const { data, error } = await resend.emails.send({
-                from: 'onboarding@resend.dev', // Resend default testing sender
-                to: 'rnurazim@gmail.com', // Must match the registered Resend account email
-                subject: `Portfolio Inquiry from ${email}`,
-                text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
-              })
-              
-              if (error) {
-                console.error("Resend API Error:", error);
-                return `Failed to send email: ${error.message}`;
-              }
-              
-              return `Email successfully sent to Nurazim! The ID is ${data?.id}. You MUST reply to the user confirming it was sent!`;
-            } catch (err: any) {
-              console.error("Execution Error:", err);
-              return `Failed to send email due to an internal error.`;
-            }
-          },
         })
       }
     })
 
-    return result.toTextStreamResponse();
+    const customStream = new ReadableStream({
+      async start(controller) {
+        try {
+          let hasChunks = false;
+          // 1. Safely stream any normal text chunks first
+          for await (const chunk of result.textStream) {
+            hasChunks = true;
+            controller.enqueue(new TextEncoder().encode(chunk));
+          }
+          
+          // 2. Check if the AI decided to call a tool at the end of its response
+          const toolCalls = await result.toolCalls;
+          if (toolCalls && toolCalls.length > 0) {
+            hasChunks = true; // Mark as successful stream to avoid fallback
+            const toolCall = toolCalls[0];
+            
+            if (toolCall.toolName === 'sendEmailToNurazim') {
+              const { email, content } = toolCall.args as any;
+              
+              if (!email || email === "undefined" || !content || content === "undefined") {
+                 controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't understand the email parameters. Could you provide your email and message again?]`));
+              } else {
+                 controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
+                 
+                 try {
+                   const { error } = await resend.emails.send({
+                     from: 'onboarding@resend.dev',
+                     to: 'rnurazim@gmail.com',
+                     subject: `Portfolio Inquiry from ${email}`,
+                     text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
+                   });
+                   
+                   if (error) {
+                     controller.enqueue(new TextEncoder().encode(`**System Error:** Failed to send email: ${error.message}`));
+                   } else {
+                     controller.enqueue(new TextEncoder().encode(`**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
+                   }
+                 } catch (resendErr: any) {
+                   controller.enqueue(new TextEncoder().encode(`**System Error:** ${resendErr.message}`));
+                 }
+              }
+            }
+          } else if (!hasChunks) {
+            // 3. Fallback for completely silent API safety filter rejections
+            const finishReason = await result.finishReason;
+            const debugMessage = `\n\n[System Debug: Stream yielded 0 chunks.\nFinish Reason: ${finishReason}\n\nThis usually indicates a silent API rejection such as a safety filter block or an internal quota handler that doesn't throw a standard HTTP error.]`;
+            controller.enqueue(new TextEncoder().encode(debugMessage));
+          }
+          
+          controller.close();
+        } catch (streamError: any) {
+          console.error("Error during streaming:", streamError);
+          const errorMessage = `\n\n[System Error: ${streamError.message}]`;
+          controller.enqueue(new TextEncoder().encode(errorMessage));
+          controller.close();
+        }
+      }
+    });
+
+    return new Response(customStream, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+      },
+    });
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
