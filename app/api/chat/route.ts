@@ -58,7 +58,14 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - Keep responses to 1-3 short paragraphs to ensure they are readable on a web interface.`;
 
     const result = await streamText({
-      model: google('gemini-2.5-flash'), // Using Gemini 2.5 Flash for fast, cost-effective responses
+      model: google('gemini-2.5-flash', {
+        safetySettings: [
+          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+        ],
+      }), // Using Gemini 2.5 Flash for fast, cost-effective responses
       system: systemPrompt,
       messages,
     })
