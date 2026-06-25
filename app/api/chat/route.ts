@@ -110,7 +110,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
             const toolCall = toolCalls[0];
             
             if (toolCall.toolName === 'sendEmailToNurazim') {
-              const { email, content } = toolCall.args as any;
+              const { email, content } = toolCall.input as any;
               
               if (!email || email === "undefined" || !content || content === "undefined") {
                  controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't understand the email parameters. Could you provide your email and message again?]`));
