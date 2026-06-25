@@ -82,7 +82,6 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       model: google('gemini-3.1-flash-lite'), // Switched to 3.1 Flash Lite for its 500 RPD quota and fast conversational responses
       system: systemPrompt,
       messages,
-      maxSteps: 5, // Allow the model to pause, execute the tool, and resume streaming seamlessly
       tools: {
         sendEmailToNurazim: tool({
           description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
@@ -90,31 +89,56 @@ If a user asks about these topics or types these exact phrases, trigger these sp
             senderEmail: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
             message: z.string().describe('The message they want to send to Nurazim.'),
           }),
-          execute: async ({ senderEmail, message }) => {
-            try {
-              const { data, error } = await resend.emails.send({
-                from: 'onboarding@resend.dev', // Resend default testing sender
-                to: 'rnurazim@gmail.com', // Must match the registered Resend account email
-                subject: `Portfolio Inquiry from ${senderEmail}`,
-                text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${senderEmail}\n\nMessage:\n${message}`,
-              })
-              
-              if (error) {
-                console.error("Resend API Error:", error);
-                return `Failed to send email: ${error.message}`;
-              }
-              
-              return `Email successfully sent to Nurazim! The ID is ${data?.id}`;
-            } catch (err: any) {
-              console.error("Execution Error:", err);
-              return `Failed to send email due to an internal error.`;
-            }
-          },
         })
       }
     })
 
-    return result.toTextStreamResponse();
+    const customStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const part of result.fullStream) {
+            if (part.type === 'text-delta') {
+              controller.enqueue(new TextEncoder().encode(part.textDelta));
+            } else if (part.type === 'tool-call') {
+              if (part.toolName === 'sendEmailToNurazim') {
+                const { senderEmail, message } = part.args as any;
+                controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${senderEmail}...*`));
+                
+                try {
+                  const { error } = await resend.emails.send({
+                    from: 'onboarding@resend.dev',
+                    to: 'rnurazim@gmail.com',
+                    subject: `Portfolio Inquiry from ${senderEmail}`,
+                    text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${senderEmail}\n\nMessage:\n${message}`,
+                  });
+                  
+                  if (error) {
+                    controller.enqueue(new TextEncoder().encode(`\n\n**System Error:** Failed to send email: ${error.message}`));
+                  } else {
+                    controller.enqueue(new TextEncoder().encode(`\n\n**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
+                  }
+                } catch (resendErr: any) {
+                  controller.enqueue(new TextEncoder().encode(`\n\n**System Error:** ${resendErr.message}`));
+                }
+              }
+            }
+          }
+          controller.close();
+        } catch (streamError: any) {
+          console.error("Error during streaming:", streamError);
+          const errorMessage = `\n\n[System Error: ${streamError.message}]`;
+          controller.enqueue(new TextEncoder().encode(errorMessage));
+          controller.close();
+        }
+      }
+    });
+
+    return new Response(customStream, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+      },
+    });
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
