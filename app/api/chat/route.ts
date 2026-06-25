@@ -114,47 +114,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       }
     })
 
-    // Custom stream to intercept and forward silent provider errors to the frontend
-    const customStream = new ReadableStream({
-      async start(controller) {
-        try {
-          let hasChunks = false;
-          for await (const part of result.fullStream) {
-            if (part.type === 'text-delta') {
-              hasChunks = true;
-              controller.enqueue(new TextEncoder().encode(part.textDelta));
-            }
-          }
-          
-          // If the stream completed successfully but yielded absolutely nothing
-          if (!hasChunks) {
-            try {
-              const finishReason = await result.finishReason;
-              const warnings = await result.warnings;
-              const debugMessage = `\n\n[System Debug: Stream yielded 0 chunks.\nFinish Reason: ${finishReason}\nWarnings: ${JSON.stringify(warnings)}\n\nThis usually indicates a silent API rejection such as a safety filter block or an internal quota handler that doesn't throw a standard HTTP error.]`;
-              controller.enqueue(new TextEncoder().encode(debugMessage));
-            } catch (metaError: any) {
-              controller.enqueue(new TextEncoder().encode(`\n\n[System Debug: Stream yielded 0 chunks, and failed to retrieve finish reason: ${metaError.message}]`));
-            }
-          }
-          
-          controller.close();
-        } catch (streamError: any) {
-          console.error("Error during streaming:", streamError);
-          // If the stream fails midway (e.g., rate limit, safety filter), send the exact error to the UI
-          const errorMessage = `\n\n[System Error: ${streamError.message || "Unknown provider error occurred."}]`;
-          controller.enqueue(new TextEncoder().encode(errorMessage));
-          controller.close();
-        }
-      }
-    });
-
-    return new Response(customStream, {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Cache-Control': 'no-cache',
-      },
-    });
+    return result.toTextStreamResponse()
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
