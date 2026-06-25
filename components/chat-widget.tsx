@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from "react"
 import { MessageCircle, X, Send, User, Bot } from "lucide-react"
 
+import ReactMarkdown from "react-markdown"
+
 type Message = {
   id: string
   role: "user" | "assistant"
@@ -143,7 +145,15 @@ export default function ChatWidget() {
                       : "bg-zinc-800 text-zinc-200"
                   }`}
                 >
-                  {m.content}
+                  <ReactMarkdown 
+                    className={`max-w-none text-sm [&>p]:my-0 [&>p]:leading-relaxed [&_strong]:font-bold [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:ml-4 [&_ol]:ml-4 [&_li]:mt-1 ${
+                      m.role === "user" 
+                        ? "text-zinc-900" 
+                        : "text-zinc-200"
+                    }`}
+                  >
+                    {m.content}
+                  </ReactMarkdown>
                 </div>
               </div>
             ))}
