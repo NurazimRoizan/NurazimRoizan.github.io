@@ -87,16 +87,23 @@ If a user asks about these topics or types these exact phrases, trigger these sp
         sendEmailToNurazim: tool({
           description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
           parameters: z.object({
-            senderEmail: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
-            message: z.string().describe('The message they want to send to Nurazim.'),
+            email: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
+            content: z.string().describe('The message they want to send to Nurazim.'),
           }),
-          execute: async ({ senderEmail, message }) => {
+          execute: async ({ email, content }) => {
+            console.log("TOOL EXECUTED WITH ARGS:", { email, content });
+            
+            // Failsafe check
+            if (!email || email === "undefined" || !content || content === "undefined") {
+              return "Failed to send email. The provided email or message content was invalid or undefined. Ask the user to provide them again.";
+            }
+
             try {
               const { data, error } = await resend.emails.send({
                 from: 'onboarding@resend.dev', // Resend default testing sender
                 to: 'rnurazim@gmail.com', // Must match the registered Resend account email
-                subject: `Portfolio Inquiry from ${senderEmail}`,
-                text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${senderEmail}\n\nMessage:\n${message}`,
+                subject: `Portfolio Inquiry from ${email}`,
+                text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
               })
               
               if (error) {
@@ -104,7 +111,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
                 return `Failed to send email: ${error.message}`;
               }
               
-              return `Email successfully sent to Nurazim! The ID is ${data?.id}`;
+              return `Email successfully sent to Nurazim! The ID is ${data?.id}. You MUST reply to the user confirming it was sent!`;
             } catch (err: any) {
               console.error("Execution Error:", err);
               return `Failed to send email due to an internal error.`;
