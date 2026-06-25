@@ -114,7 +114,30 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       }
     })
 
-    return result.toTextStreamResponse()
+    const customStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const part of result.fullStream) {
+            if (part.type === 'text-delta') {
+              controller.enqueue(new TextEncoder().encode(part.textDelta));
+            }
+          }
+          controller.close();
+        } catch (streamError: any) {
+          console.error("Error during streaming:", streamError);
+          const errorMessage = `\n\n[System Error: ${streamError.message}]`;
+          controller.enqueue(new TextEncoder().encode(errorMessage));
+          controller.close();
+        }
+      }
+    });
+
+    return new Response(customStream, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+      },
+    });
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
