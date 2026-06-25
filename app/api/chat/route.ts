@@ -65,7 +65,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - Keep responses to 1-3 short paragraphs to ensure they are readable on a web interface.`;
 
     const result = await streamText({
-      model: google('gemini-1.5-flash'), // Downgraded to Gemini 1.5 Flash for improved stability and fewer rate limits
+      model: google('gemini-2.5-flash'), // Reverted to 2.5-flash as requested
       system: systemPrompt,
       messages,
     })
