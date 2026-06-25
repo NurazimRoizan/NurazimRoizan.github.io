@@ -95,19 +95,19 @@ If a user asks about these topics or types these exact phrases, trigger these sp
               const { data, error } = await resend.emails.send({
                 from: 'onboarding@resend.dev', // Resend default testing sender
                 to: 'rnurazim@gmail.com', // Must match the registered Resend account email
-                subject: \`Portfolio Inquiry from \${senderEmail}\`,
-                text: \`You have a new message from your portfolio AI Chat Widget!\\n\\nSender: \${senderEmail}\\n\\nMessage:\\n\${message}\`,
+                subject: `Portfolio Inquiry from ${senderEmail}`,
+                text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${senderEmail}\n\nMessage:\n${message}`,
               })
               
               if (error) {
                 console.error("Resend API Error:", error);
-                return \`Failed to send email: \${error.message}\`;
+                return `Failed to send email: ${error.message}`;
               }
               
-              return \`Email successfully sent to Nurazim! The ID is \${data?.id}\`;
+              return `Email successfully sent to Nurazim! The ID is ${data?.id}`;
             } catch (err: any) {
               console.error("Execution Error:", err);
-              return \`Failed to send email due to an internal error.\`;
+              return `Failed to send email due to an internal error.`;
             }
           },
         })
