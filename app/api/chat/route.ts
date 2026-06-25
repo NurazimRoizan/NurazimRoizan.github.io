@@ -70,7 +70,30 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       messages,
     })
 
-    return result.toTextStreamResponse()
+    // Custom stream to intercept and forward silent provider errors to the frontend
+    const customStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.textStream) {
+            controller.enqueue(new TextEncoder().encode(chunk));
+          }
+          controller.close();
+        } catch (streamError: any) {
+          console.error("Error during streaming:", streamError);
+          // If the stream fails midway (e.g., rate limit, safety filter), send the exact error to the UI
+          const errorMessage = `\n\n[System Error: ${streamError.message || "Unknown provider error occurred."}]`;
+          controller.enqueue(new TextEncoder().encode(errorMessage));
+          controller.close();
+        }
+      }
+    });
+
+    return new Response(customStream, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+      },
+    });
   } catch (error: any) {
     console.error('Error in chat API route:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process chat request' }), {
