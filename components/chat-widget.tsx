@@ -69,6 +69,14 @@ export default function ChatWidget() {
           prev.map((m) => m.id === assistantId ? { ...m, content: assistantContent } : m)
         )
       }
+      
+      // Fallback if the AI returned an empty string or the stream failed silently
+      if (!assistantContent.trim()) {
+        const fallback = "Oops, my digital brain just short-circuited! Could you try asking that again?"
+        setMessages((prev) => 
+          prev.map((m) => m.id === assistantId ? { ...m, content: fallback } : m)
+        )
+      }
     } catch (err: any) {
       console.error(err)
       setError(err.message || "Failed to fetch AI response")
