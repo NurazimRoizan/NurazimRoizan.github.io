@@ -119,9 +119,11 @@ If a user asks about these topics or types these exact phrases, trigger these sp
       async start(controller) {
         try {
           let hasChunks = false;
-          for await (const chunk of result.textStream) {
-            hasChunks = true;
-            controller.enqueue(new TextEncoder().encode(chunk));
+          for await (const part of result.fullStream) {
+            if (part.type === 'text-delta') {
+              hasChunks = true;
+              controller.enqueue(new TextEncoder().encode(part.textDelta));
+            }
           }
           
           // If the stream completed successfully but yielded absolutely nothing
