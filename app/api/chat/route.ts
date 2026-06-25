@@ -74,9 +74,24 @@ If a user asks about these topics or types these exact phrases, trigger these sp
     const customStream = new ReadableStream({
       async start(controller) {
         try {
+          let hasChunks = false;
           for await (const chunk of result.textStream) {
+            hasChunks = true;
             controller.enqueue(new TextEncoder().encode(chunk));
           }
+          
+          // If the stream completed successfully but yielded absolutely nothing
+          if (!hasChunks) {
+            try {
+              const finishReason = await result.finishReason;
+              const warnings = await result.warnings;
+              const debugMessage = `\n\n[System Debug: Stream yielded 0 chunks.\nFinish Reason: ${finishReason}\nWarnings: ${JSON.stringify(warnings)}\n\nThis usually indicates a silent API rejection such as a safety filter block or an internal quota handler that doesn't throw a standard HTTP error.]`;
+              controller.enqueue(new TextEncoder().encode(debugMessage));
+            } catch (metaError: any) {
+              controller.enqueue(new TextEncoder().encode(`\n\n[System Debug: Stream yielded 0 chunks, and failed to retrieve finish reason: ${metaError.message}]`));
+            }
+          }
+          
           controller.close();
         } catch (streamError: any) {
           console.error("Error during streaming:", streamError);
