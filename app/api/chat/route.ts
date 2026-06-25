@@ -3,10 +3,18 @@ import { streamText } from 'ai'
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
+export const runtime = 'edge'
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json()
+    const body = await req.json()
+    // Sanitize messages to only include role and content to prevent API errors
+    const messages = body.messages
+      .filter((m: any) => m.content && m.content.trim() !== '')
+      .map((m: any) => ({
+        role: m.role,
+        content: m.content
+      }))
 
     const systemPrompt = `You are the digital clone of Nurazim Roizan, an interactive "mini-me" embedded in my personal portfolio website. 
 Your primary goal is to answer questions from recruiters, peers, or visitors about YOUR skills, YOUR experience, YOUR education, YOUR projects, and YOUR interests. 
