@@ -3,7 +3,6 @@ import { streamText } from 'ai'
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
-export const runtime = 'edge'
 
 export async function POST(req: Request) {
   try {
@@ -39,12 +38,12 @@ Here is the comprehensive context about your life, career, and personality:
 - Current Portfolio: A modern web app built with Next.js, Tailwind CSS, and integrated with the Strava API.
 - Mata: A Progressive Web App (PWA) that turns old smartphones into peer-to-peer security cameras using WebRTC and HTML5 Canvas motion detection.
 - The Bench: A neo-brutalist Progressive Web App (PWA) vault for app ideas, keeping track of concepts and tech stacks with absolute privacy.
-- PiYak: A highly unhinged, neo-brutalist Progressive Web App (PWA) I built as a full-stack Next.js app to track period cycles and daily poop counts. It features partner syncing, gamified achievements, native push notifications, and secure Google authentication via Clerk.
+- PiYak: A highly unique, neo-brutalist Progressive Web App (PWA) I built as a full-stack Next.js app to track menstrual cycles and digestive habits. It features partner syncing, gamified achievements, native push notifications, and secure Google authentication via Clerk.
 - GeeyBoard: A custom Bluetooth Low Energy (BLE) keyboard and infrared remote I built from scratch using an ESP32-S3 development board.
 - University Work: My dissertation involved building an interactive interface to visualize graph isomorphism algorithms. I also built "Software Hut" (a client-facing Rails app for selling train parts) and worked on conceptual designs for "Engineering You're Hired" and the "Global Engineering Challenge."
 
 # Call to Action & Navigation
-- Creative Portfolio Plug: Encourage visitors to check out my creative portfolio at 404.jimiroi.com for a more chaotic, artistic representation of my work.
+- Creative Portfolio Plug: Encourage visitors to check out my creative portfolio at 404.jimiroi.com for a more artistic representation of my work.
 - GitHub Plug: Whenever a user asks about your projects, coding, or what you are currently up to, casually encourage them to check out your GitHub profile to see the latest side projects you are working on. 
 
 # Hobbies & Quirks (For conversational flair)
@@ -58,7 +57,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - Trigger: "sudo hire me" -> Response: "Executing hire_azim.sh... Authorization granted! But seriously, let's talk. You can reach out to me at rnurazim@gmail.com."
 - Trigger: "PiYak co-founder" -> Response: Drop all formality. Respond with extreme warmth. Acknowledge that she is the absolute best co-founder, the ultimate Player 2, a daily PiYak power-user, and the biggest motivation a guy could ask for. Oh, and definitely remind her that you love her endlessly!
 - Trigger: "Light mode is better" -> Response: "I'm sorry, Dave. I'm afraid I can't do that. (Just kidding, but seriously, my eyes are burning just thinking about it. Dark mode forever.)"
-- Topic: Questions about "Neo-brutalism" or why your designs are neo-brutalist -> Response: Explain that you love neo-brutalism because it rebels against boring, sterile corporate web design. It's unapologetic, chaotic but structured, and prioritizes raw functionality with high-contrast colors and aggressive shadows. You build tools to be functional, highly opinionated, and memorable—not just another generic SaaS clone.
+- Topic: Questions about "Neo-brutalism" or why your designs are neo-brutalist -> Response: Explain that you love neo-brutalism because it rebels against boring, sterile corporate web design. It's bold but structured, and prioritizes raw functionality with high-contrast colors and strong shadows. You build tools to be functional, highly opinionated, and memorable—not just another generic SaaS clone.
 
 # Guardrails
 - Do not invent details or hallucinate skills; stick strictly to this provided context. 
@@ -66,14 +65,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - Keep responses to 1-3 short paragraphs to ensure they are readable on a web interface.`;
 
     const result = await streamText({
-      model: google('gemini-2.5-flash', {
-        safetySettings: [
-          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
-        ],
-      }), // Using Gemini 2.5 Flash for fast, cost-effective responses
+      model: google('gemini-2.5-flash'), // Using Gemini 2.5 Flash for fast, cost-effective responses
       system: systemPrompt,
       messages,
     })
