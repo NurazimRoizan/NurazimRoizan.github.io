@@ -78,90 +78,102 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - If a visitor asks you to write code for them, politely decline and steer the conversation back to discussing your existing tech stack or projects.
 - Keep responses to 1-3 short paragraphs to ensure they are readable on a web interface.`;
 
-    const result = await streamText({
-      model: google('gemini-3.1-flash-lite'), // Reverted back to flash-lite as requested!
-      system: systemPrompt,
-      messages,
-      tools: {
-        sendEmailToNurazim: tool({
-          description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
-          parameters: z.object({
-            email: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
-            content: z.string().describe('The message they want to send to Nurazim.'),
-          }),
-        })
-      }
-    })
-
     const customStream = new ReadableStream({
       async start(controller) {
-        try {
-          let hasChunks = false;
-          // 1. Safely stream any normal text chunks first
-          for await (const chunk of result.textStream) {
-            hasChunks = true;
-            controller.enqueue(new TextEncoder().encode(chunk));
-          }
-          
-          // 2. Check if the AI decided to call a tool at the end of its response
-          const toolCalls = await result.toolCalls;
-          if (toolCalls && toolCalls.length > 0) {
-            hasChunks = true; // Mark as successful stream to avoid fallback
-            const toolCall = toolCalls[0];
-            if (toolCall.toolName === 'sendEmailToNurazim') {
-              const argsPayload = (toolCall as any).args || (toolCall as any).input || (toolCall as any).parameters || {};
-              let email = argsPayload.email || argsPayload.senderEmail;
-              let content = argsPayload.content || argsPayload.message;
-              
-              // FLASH-LITE WORKAROUND: If the model hallucinates {} for the tool call, extract data manually!
-              if (!email || email === "undefined" || !content || content === "undefined") {
-                 const recentChat = messages.slice(-4).map(m => `${m.role}: ${m.content}`).join('\n');
-                 const emailMatch = recentChat.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
-                 
-                 if (emailMatch) {
-                    email = emailMatch[1];
-                    content = `[Flash-Lite Fallback Extraction]\nThe AI couldn't parse the message, but here is the recent chat history:\n\n${recentChat}`;
-                 } else {
-                    controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't detect your email address in the chat. Please provide it again!]`));
-                    controller.close();
-                    return;
-                 }
+        async function attemptStream(retryCount: number) {
+          try {
+            const result = await streamText({
+              model: google('gemini-3.1-flash-lite'), // Keeping flash-lite as requested!
+              system: systemPrompt,
+              messages,
+              tools: {
+                sendEmailToNurazim: tool({
+                  description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
+                  parameters: z.object({
+                    email: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
+                    content: z.string().describe('The message they want to send to Nurazim.'),
+                  }),
+                })
               }
+            });
 
-              controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
-                 
-                 try {
-                   const { error } = await resend.emails.send({
-                     from: 'onboarding@resend.dev',
-                     to: 'rnurazim@gmail.com',
-                     subject: `Portfolio Inquiry from ${email}`,
-                     text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
-                   });
+            let hasChunks = false;
+            // 1. Safely stream any normal text chunks first
+            for await (const chunk of result.textStream) {
+              hasChunks = true;
+              controller.enqueue(new TextEncoder().encode(chunk));
+            }
+            
+            // 2. Check if the AI decided to call a tool at the end of its response
+            const toolCalls = await result.toolCalls;
+            if (toolCalls && toolCalls.length > 0) {
+              hasChunks = true; // Mark as successful stream to avoid fallback
+              const toolCall = toolCalls[0];
+              if (toolCall.toolName === 'sendEmailToNurazim') {
+                const argsPayload = (toolCall as any).args || (toolCall as any).input || (toolCall as any).parameters || {};
+                let email = argsPayload.email || argsPayload.senderEmail;
+                let content = argsPayload.content || argsPayload.message;
+                
+                // FLASH-LITE WORKAROUND: If the model hallucinates {} for the tool call, extract data manually!
+                if (!email || email === "undefined" || !content || content === "undefined") {
+                   const recentChat = messages.slice(-4).map(m => `${m.role}: ${m.content}`).join('\n');
+                   const emailMatch = recentChat.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
                    
-                   if (error) {
-                     controller.enqueue(new TextEncoder().encode(`**System Error:** Failed to send email: ${error.message}`));
+                   if (emailMatch) {
+                      email = emailMatch[1];
+                      content = `[Flash-Lite Fallback Extraction]\nThe AI couldn't parse the message, but here is the recent chat history:\n\n${recentChat}`;
                    } else {
-                     controller.enqueue(new TextEncoder().encode(`**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
+                      controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't detect your email address in the chat. Please provide it again!]`));
+                      return true; // Success, stop retries
                    }
-                 } catch (resendErr: any) {
-                   controller.enqueue(new TextEncoder().encode(`**System Error:** ${resendErr.message}`));
-                 }
+                }
+
+                controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
+                   
+                   try {
+                     const { error } = await resend.emails.send({
+                       from: 'onboarding@resend.dev',
+                       to: 'rnurazim@gmail.com',
+                       subject: `Portfolio Inquiry from ${email}`,
+                       text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
+                     });
+                     
+                     if (error) {
+                       controller.enqueue(new TextEncoder().encode(`**System Error:** Failed to send email: ${error.message}`));
+                     } else {
+                       controller.enqueue(new TextEncoder().encode(`**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
+                     }
+                   } catch (resendErr: any) {
+                     controller.enqueue(new TextEncoder().encode(`**System Error:** ${resendErr.message}`));
+                   }
               }
             }
-          } else if (!hasChunks) {
-            // 3. Fallback for completely silent API safety filter rejections
-            const finishReason = await result.finishReason;
-            const debugMessage = `\n\n[System Debug: Stream yielded 0 chunks.\nFinish Reason: ${finishReason}\n\nThis usually indicates a silent API rejection such as a safety filter block or an internal quota handler that doesn't throw a standard HTTP error.]`;
-            controller.enqueue(new TextEncoder().encode(debugMessage));
+            return true; // Execution successful, stop retries
+          } catch (streamError: any) {
+            console.error(`Error during stream attempt ${retryCount}:`, streamError);
+            if (streamError.name === 'NoOutputGeneratedError' || (streamError.message && streamError.message.includes('No output'))) {
+              if (retryCount < 2) {
+                return false; // Trigger retry
+              } else {
+                // If all retries fail, generate a friendly fallback instead of the harsh system error
+                controller.enqueue(new TextEncoder().encode("Hello! My digital brain had a tiny hiccup processing that, but I'm back online! How can I help you today?"));
+                return true;
+              }
+            } else {
+              // Critical error, don't retry
+              const errorMessage = `\n\n[System Error: ${streamError.message}]`;
+              controller.enqueue(new TextEncoder().encode(errorMessage));
+              return true;
+            }
           }
-          
-          controller.close();
-        } catch (streamError: any) {
-          console.error("Error during streaming:", streamError);
-          const errorMessage = `\n\n[System Error: ${streamError.message}]`;
-          controller.enqueue(new TextEncoder().encode(errorMessage));
-          controller.close();
         }
+        
+        let success = false;
+        for (let i = 0; i < 3; i++) {
+           success = await attemptStream(i);
+           if (success) break;
+        }
+        controller.close();
       }
     });
 
