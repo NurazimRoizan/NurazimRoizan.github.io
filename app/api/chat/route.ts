@@ -132,7 +132,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
                    
                    try {
                      const { error } = await resend.emails.send({
-                       from: 'onboarding@resend.dev',
+                       from: 'AI Assistant <chat@jimiroi.com>',
                        to: 'rnurazim@gmail.com',
                        subject: `Portfolio Inquiry from ${email}`,
                        text: `You have a new message from your portfolio AI Chat Widget!\n\nSender: ${email}\n\nMessage:\n${content}`,
