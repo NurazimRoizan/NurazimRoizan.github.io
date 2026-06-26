@@ -79,7 +79,7 @@ If a user asks about these topics or types these exact phrases, trigger these sp
 - Keep responses to 1-3 short paragraphs to ensure they are readable on a web interface.`;
 
     const result = await streamText({
-      model: google('gemini-3.1-flash'), // Upgraded to standard Flash for reliable structured outputs and tool calling
+      model: google('gemini-3.1-flash-lite'), // Reverted back to flash-lite as requested!
       system: systemPrompt,
       messages,
       tools: {
@@ -110,13 +110,25 @@ If a user asks about these topics or types these exact phrases, trigger these sp
             const toolCall = toolCalls[0];
             if (toolCall.toolName === 'sendEmailToNurazim') {
               const argsPayload = (toolCall as any).args || (toolCall as any).input || (toolCall as any).parameters || {};
-              const email = argsPayload.email || argsPayload.senderEmail;
-              const content = argsPayload.content || argsPayload.message;
+              let email = argsPayload.email || argsPayload.senderEmail;
+              let content = argsPayload.content || argsPayload.message;
               
+              // FLASH-LITE WORKAROUND: If the model hallucinates {} for the tool call, extract data manually!
               if (!email || email === "undefined" || !content || content === "undefined") {
-                 controller.enqueue(new TextEncoder().encode(`\n\n[System Error: The AI failed to format the tool request correctly. Raw payload received: ${JSON.stringify(toolCall)}]`));
-              } else {
-                 controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
+                 const recentChat = messages.slice(-4).map(m => `${m.role}: ${m.content}`).join('\n');
+                 const emailMatch = recentChat.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
+                 
+                 if (emailMatch) {
+                    email = emailMatch[1];
+                    content = `[Flash-Lite Fallback Extraction]\nThe AI couldn't parse the message, but here is the recent chat history:\n\n${recentChat}`;
+                 } else {
+                    controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't detect your email address in the chat. Please provide it again!]`));
+                    controller.close();
+                    return;
+                 }
+              }
+
+              controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
                  
                  try {
                    const { error } = await resend.emails.send({
