@@ -108,12 +108,13 @@ If a user asks about these topics or types these exact phrases, trigger these sp
           if (toolCalls && toolCalls.length > 0) {
             hasChunks = true; // Mark as successful stream to avoid fallback
             const toolCall = toolCalls[0];
-            
             if (toolCall.toolName === 'sendEmailToNurazim') {
-              const { email, content } = toolCall.input as any;
+              const argsPayload = (toolCall as any).args || (toolCall as any).input || (toolCall as any).parameters || {};
+              const email = argsPayload.email || argsPayload.senderEmail;
+              const content = argsPayload.content || argsPayload.message;
               
               if (!email || email === "undefined" || !content || content === "undefined") {
-                 controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't understand the email parameters. Could you provide your email and message again?]`));
+                 controller.enqueue(new TextEncoder().encode(`\n\n[System Error: The AI failed to format the tool request correctly. Raw payload received: ${JSON.stringify(toolCall)}]`));
               } else {
                  controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
                  
