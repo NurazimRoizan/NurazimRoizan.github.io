@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Sidebar from "@/components/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
+import AnalyticsTracker from "@/components/analytics"
 import "./globals.css"
 import ChatWidget from "@/components/chat-widget"
 
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Sidebar />
           {children}
           <Analytics />
+          <AnalyticsTracker />
           <ChatWidget />
         </ThemeProvider>
       </body>

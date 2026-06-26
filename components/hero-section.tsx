@@ -2,6 +2,7 @@
 
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { trackEvent } from "@/components/analytics"
 
 export default function HeroSection() {
   return (
@@ -32,7 +33,10 @@ export default function HeroSection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Button
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => {
+              trackEvent("view_work_click")
+              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+            }}
             className="px-8 py-6 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-600 hover:to-cyan-500 text-black font-semibold rounded-lg flex items-center justify-center gap-2 group shadow-lg glow-border-strong hover:scale-105 active:scale-95 transition-all"
           >
             View My Work
@@ -46,6 +50,7 @@ export default function HeroSection() {
             <a 
               href="/Nurazim_Roizan_CV.pdf" 
               download="Nurazim_Roizan_CV.pdf"
+              onClick={() => trackEvent("resume_download")}
             >
               Download CV
             </a>
