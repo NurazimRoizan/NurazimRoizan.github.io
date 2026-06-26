@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle2 } from "lucide-react"
+import GithubStats from "@/components/github-stats"
 
 interface Experience {
   id: number
@@ -177,6 +178,15 @@ export default function CVSection() {
               </Card>
             ))}
           </div>
+        </div>
+
+        {/* GitHub Stats */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span className="h-1 w-8 bg-gradient-to-r from-cyan-400 to-cyan-300 rounded-full" />
+            GitHub Activity
+          </h3>
+          <GithubStats />
         </div>
 
         {/* Skills */}
