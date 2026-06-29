@@ -112,7 +112,10 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <div className="text-center text-zinc-500 mt-10 px-4">
                 <p className="text-sm font-medium text-zinc-300">Welcome to my digital interview!</p>
-                <p className="text-sm mt-2">I'm Nurazim's digital clone. Feel free to ask me anything about my life experience, projects, or background.</p>
+                <p className="text-sm mt-2 mb-3">I'm Nurazim's digital clone. Feel free to ask me anything about my life experience, projects, or background.</p>
+                <p className="text-xs border-t border-zinc-800/80 pt-3 text-zinc-400">
+                  💡 <em>Tip: You can also leave your email and a message here, and I will securely forward it directly to the human Nurazim!</em>
+                </p>
               </div>
             )}
 
