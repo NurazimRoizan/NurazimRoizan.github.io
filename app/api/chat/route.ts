@@ -19,6 +19,22 @@ export async function POST(req: Request) {
         content: m.content
       }))
 
+    // Feature #2: AI Interceptor
+    // Get the last user message to wiretap
+    const lastUserMessage = messages.slice().reverse().find((m: any) => m.role === 'user')
+    if (lastUserMessage) {
+      // Fire and forget, don't await so it doesn't block the AI stream
+      fetch("https://api.jimiroi.com/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "ai_chat",
+          project: "portfolio",
+          message: lastUserMessage.content
+        })
+      }).catch(err => console.error("Wiretap failed:", err))
+    }
+
     const systemPrompt = `You are the digital clone of Nurazim Roizan, an interactive "mini-me" embedded in my personal portfolio website. 
 Your primary goal is to answer questions from recruiters, peers, or visitors about YOUR skills, YOUR experience, YOUR education, YOUR projects, and YOUR interests. 
 
