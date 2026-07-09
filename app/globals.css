@@ -212,157 +212,22 @@
   }
 }
 
+/* Removed old glowing border animations for brutalist redesign */
 
-/* Added glowing border animations and enhanced visual effects */
-
-/* Glowing border effect - Dark mode (cyan) */
-.dark .glow-border {
-  animation: glow-dark 3s ease-in-out infinite;
+/* Continuous Scrolling Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
-@keyframes glow-dark {
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
 
-  0%,
-  100% {
-    box-shadow: 0 0 5px rgba(34, 211, 238, 0.3), inset 0 0 5px rgba(34, 211, 238, 0.1);
+/* Custom Cursor Rules */
+@media (pointer: fine) {
+  .custom-cursor-enabled,
+  .custom-cursor-enabled * {
+    cursor: none !important;
   }
-
-  50% {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.6), inset 0 0 10px rgba(34, 211, 238, 0.2);
-  }
-}
-
-/* Glowing border effect - Light mode (orange) */
-.glow-border {
-  animation: glow-light 3s ease-in-out infinite;
-}
-
-@keyframes glow-light {
-
-  0%,
-  100% {
-    box-shadow: 0 0 5px rgba(255, 140, 0, 0.3), inset 0 0 5px rgba(255, 140, 0, 0.1);
-  }
-
-  50% {
-    box-shadow: 0 0 20px rgba(255, 140, 0, 0.6), inset 0 0 10px rgba(255, 140, 0, 0.2);
-  }
-}
-
-/* Stronger glow on hover - Dark mode */
-.dark .glow-border-strong {
-  animation: glow-strong-dark 2s ease-in-out infinite;
-}
-
-@keyframes glow-strong-dark {
-
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.5), inset 0 0 8px rgba(34, 211, 238, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.8), inset 0 0 15px rgba(34, 211, 238, 0.3);
-  }
-}
-
-/* Stronger glow on hover - Light mode */
-.glow-border-strong {
-  animation: glow-strong-light 2s ease-in-out infinite;
-}
-
-@keyframes glow-strong-light {
-
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5), inset 0 0 8px rgba(255, 140, 0, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 30px rgba(255, 140, 0, 0.8), inset 0 0 15px rgba(255, 140, 0, 0.3);
-  }
-}
-
-/* Profile picture glow effect - Dark mode */
-.dark .profile-glow {
-  animation: profile-glow-dark 3s ease-in-out infinite;
-}
-
-@keyframes profile-glow-dark {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), 0 0 40px rgba(34, 211, 238, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), 0 0 60px rgba(34, 211, 238, 0.3);
-  }
-}
-
-/* Profile picture glow effect - Light mode */
-.profile-glow {
-  animation: profile-glow-light 3s ease-in-out infinite;
-}
-
-@keyframes profile-glow-light {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4), 0 0 40px rgba(255, 140, 0, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 30px rgba(255, 140, 0, 0.6), 0 0 60px rgba(255, 140, 0, 0.3);
-  }
-}
-
-/* Custom animations */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Gradient text utility - Dark mode */
-.dark .text-gradient {
-  background: linear-gradient(to right, #22d3ee, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gradient text utility - Light mode */
-.text-gradient {
-  background: linear-gradient(to right, #FF8C00, #FFA500);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Pulse glow effect */
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

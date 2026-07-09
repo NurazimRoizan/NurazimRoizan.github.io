@@ -6,6 +6,7 @@ import HeroSection from "@/components/hero-section"
 import ProjectsSection from "@/components/projects-section"
 import CVSection from "@/components/cv-section"
 import Footer from "@/components/footer"
+import Marquee from "@/components/marquee"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
@@ -40,6 +41,8 @@ export default function Home() {
       <div id="cv">
         <CVSection />
       </div>
+
+      <Marquee />
 
       <Footer />
     </main>

@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import AnalyticsTracker from "@/components/analytics"
 import "./globals.css"
 import ChatWidget from "@/components/chat-widget"
+import CustomCursor from "@/components/custom-cursor"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -48,6 +49,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
+          <CustomCursor />
           <Sidebar />
           {children}
           <Analytics />

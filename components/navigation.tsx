@@ -19,59 +19,62 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border md:left-72">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold bg-gradient-to-r from-[#FF8C00] to-[#FFA500] dark:from-cyan-400 dark:to-cyan-300 bg-clip-text text-transparent">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card border-b-4 border-border md:left-72">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Brand */}
+        <div className="text-lg md:text-xl font-black uppercase tracking-tighter bg-primary text-primary-foreground px-4 py-2 border-2 border-border shadow-brutal-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
           <a href="/">
-            NurazimRoizan/Portfolio
+            NurazimRoizan
           </a>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 items-center">
+        <div className="hidden md:flex gap-4 items-center">
           {navItems.map((item) => (
             <Link
               key={item.id}
               href={item.id === "home" ? "/" : `/#${item.id}`}
               onClick={(e) => {
-                // Only prevent default and use onNavigate if we're already on home page
                 if (window.location.pathname === "/" && onNavigate) {
                   e.preventDefault()
                   onNavigate(item.id)
                 }
               }}
-              className={`transition-colors duration-300 font-medium relative group ${activeSection === item.id ? "text-[#FF8C00] dark:text-cyan-400" : "text-muted-foreground hover:text-foreground"
-                }`}
+              className={`px-4 py-2 font-black uppercase tracking-widest text-sm transition-all border-2 ${
+                activeSection === item.id 
+                  ? "bg-foreground text-background border-border shadow-brutal-sm" 
+                  : "border-transparent text-foreground hover:bg-primary hover:text-primary-foreground hover:border-border hover:shadow-brutal-sm hover:-translate-y-[2px]"
+              }`}
             >
               {item.label}
-              <span
-                className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#FF8C00] to-[#FFA500] dark:from-cyan-400 dark:to-cyan-300 transition-all duration-300 ${activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
-              />
             </Link>
           ))}
           <Link
             href="/strava"
-            className="transition-colors duration-300 font-medium relative group text-muted-foreground hover:text-foreground"
+            className="px-4 py-2 font-black uppercase tracking-widest text-sm transition-all border-2 border-transparent text-foreground hover:bg-primary hover:text-primary-foreground hover:border-border hover:shadow-brutal-sm hover:-translate-y-[2px]"
           >
             Strava
-            <span className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#FF8C00] to-[#FFA500] dark:from-cyan-400 dark:to-cyan-300 transition-all duration-300 w-0 group-hover:w-full" />
           </Link>
 
           {/* Theme Toggle */}
-          <ModeToggle />
+          <div className="ml-2">
+            <ModeToggle />
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button 
+          className="md:hidden p-2 bg-background border-2 border-border shadow-brutal-sm text-foreground hover:bg-primary hover:text-primary-foreground" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background/95">
-          <div className="flex flex-col gap-4 p-4">
+        <div className="md:hidden border-t-4 border-border bg-card">
+          <div className="flex flex-col p-4 gap-4">
             {navItems.map((item) => (
               <Link
                 key={item.id}
@@ -83,8 +86,11 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
                   }
                   setIsMenuOpen(false)
                 }}
-                className={`text-left font-medium transition-colors ${activeSection === item.id ? "text-[#FF8C00] dark:text-cyan-400" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                className={`block px-4 py-3 font-black uppercase tracking-widest text-sm border-2 ${
+                  activeSection === item.id 
+                    ? "bg-foreground text-background border-border shadow-brutal-sm" 
+                    : "border-transparent text-foreground hover:bg-primary hover:text-primary-foreground hover:border-border hover:shadow-brutal-sm"
+                }`}
               >
                 {item.label}
               </Link>
@@ -92,13 +98,13 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
             <Link
               href="/strava"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left font-medium transition-colors text-muted-foreground hover:text-foreground"
+              className="block px-4 py-3 font-black uppercase tracking-widest text-sm border-2 border-transparent text-foreground hover:bg-primary hover:text-primary-foreground hover:border-border hover:shadow-brutal-sm"
             >
               Strava
             </Link>
 
             {/* Theme Toggle for Mobile */}
-            <div className="pt-2 border-t border-border">
+            <div className="pt-4 mt-2 border-t-4 border-border flex justify-start">
               <ModeToggle />
             </div>
           </div>
