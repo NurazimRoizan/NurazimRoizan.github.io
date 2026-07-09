@@ -116,7 +116,7 @@ export default function ChatWidget() {
                 <p className="text-sm font-black uppercase tracking-widest text-foreground mb-2">Welcome!</p>
                 <p className="text-sm font-medium text-foreground mb-4">I'm Nurazim's digital clone. Ask me anything about my experience or background.</p>
                 <p className="text-xs border-t-2 border-border pt-3 text-muted-foreground font-bold uppercase tracking-widest">
-                  💡 You can leave a message here, and I'll forward it securely.
+                  💡 Tip: You can also leave your email and a message here, and I will securely forward it directly to the human Nurazim!
                 </p>
               </div>
             )}
