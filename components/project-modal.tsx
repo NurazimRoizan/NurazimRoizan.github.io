@@ -50,8 +50,8 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
       />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div className="relative bg-card border-4 border-border shadow-brutal max-w-4xl w-full max-h-[90vh] overflow-y-auto flex flex-col md:flex-row">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto pt-10">
+        <div className="relative bg-card border-4 border-border shadow-brutal max-w-4xl w-full flex flex-col my-auto">
           
           {/* Close Button */}
           <button
@@ -62,13 +62,13 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             <X size={24} />
           </button>
 
-          {/* Project Image Panel (Left on Desktop) */}
-          <div className="w-full md:w-2/5 border-b-4 md:border-b-0 md:border-r-4 border-border flex-shrink-0 bg-muted">
-            <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-64 md:h-full object-cover" />
+          {/* Project Image Panel (Top) */}
+          <div className="w-full border-b-4 border-border flex-shrink-0 bg-muted">
+            <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-64 md:h-[400px] object-cover" />
           </div>
 
-          {/* Content Panel (Right on Desktop) */}
-          <div className="w-full md:w-3/5 p-8 md:p-10 flex flex-col">
+          {/* Content Panel (Bottom) - Scrollable */}
+          <div className="w-full p-8 md:p-10 flex flex-col overflow-y-auto max-h-[60vh]">
             <div className="mb-8">
               <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-foreground mb-6 pr-12">{project.title}</h2>
               
