@@ -91,16 +91,18 @@ export default function ChatWidget() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 h-[32rem] bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in slide-in-from-bottom-5 fade-in duration-200">
+        <div className="mb-4 w-80 sm:w-96 h-[32rem] bg-card border-4 border-border shadow-brutal flex flex-col animate-in slide-in-from-bottom-5 fade-in duration-200">
           {/* Header */}
-          <div className="bg-zinc-800/50 p-4 border-b border-zinc-800 flex justify-between items-center backdrop-blur-sm">
-            <div className="flex items-center gap-2">
-              <Bot className="w-5 h-5 text-emerald-400" />
-              <h3 className="font-medium text-zinc-100">Digital Interview</h3>
+          <div className="bg-primary p-4 border-b-4 border-border flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="p-1 bg-primary-foreground text-primary border-2 border-border shadow-brutal-sm">
+                <Bot className="w-5 h-5" />
+              </div>
+              <h3 className="font-black uppercase tracking-widest text-primary-foreground">Digital Interview</h3>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="p-1 bg-background border-2 border-border shadow-brutal-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-foreground"
               aria-label="Close chat"
             >
               <X className="w-5 h-5" />
@@ -108,51 +110,51 @@ export default function ChatWidget() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-card">
             {messages.length === 0 && (
-              <div className="text-center text-zinc-500 mt-10 px-4">
-                <p className="text-sm font-medium text-zinc-300">Welcome to my digital interview!</p>
-                <p className="text-sm mt-2 mb-3">I'm Nurazim's digital clone. Feel free to ask me anything about my life experience, projects, or background.</p>
-                <p className="text-xs border-t border-zinc-800/80 pt-3 text-zinc-400">
-                  💡 <em>Tip: You can also leave your email and a message here, and I will securely forward it directly to the human Nurazim!</em>
+              <div className="text-center mt-6 px-4 border-4 border-border p-4 shadow-brutal-sm bg-secondary">
+                <p className="text-sm font-black uppercase tracking-widest text-foreground mb-2">Welcome!</p>
+                <p className="text-sm font-medium text-foreground mb-4">I'm Nurazim's digital clone. Ask me anything about my experience or background.</p>
+                <p className="text-xs border-t-2 border-border pt-3 text-muted-foreground font-bold uppercase tracking-widest">
+                  💡 You can leave a message here, and I'll forward it securely.
                 </p>
               </div>
             )}
 
             {error && (
-              <div className="p-3 bg-red-500/10 border border-red-500/50 text-red-400 rounded-xl text-sm mb-4">
-                Error connecting to AI: {error}
+              <div className="p-3 bg-destructive text-destructive-foreground border-4 border-border shadow-brutal text-sm font-bold uppercase tracking-widest mb-4">
+                Error: {error}
               </div>
             )}
             
             {messages.map((m) => (
               <div
                 key={m.id}
-                className={`flex gap-3 max-w-[85%] ${
+                className={`flex gap-3 max-w-[90%] ${
                   m.role === "user" ? "ml-auto flex-row-reverse" : "mr-auto"
                 }`}
               >
                 <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                  className={`flex-shrink-0 w-8 h-8 flex items-center justify-center border-2 border-border shadow-brutal-sm ${
                     m.role === "user"
-                      ? "bg-zinc-700 text-zinc-300"
-                      : "bg-emerald-500/10 text-emerald-400"
+                      ? "bg-foreground text-background"
+                      : "bg-primary text-primary-foreground"
                   }`}
                 >
                   {m.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                 </div>
                 <div
-                  className={`rounded-2xl px-4 py-2.5 text-sm whitespace-pre-wrap ${
+                  className={`px-4 py-3 text-sm whitespace-pre-wrap border-2 border-border shadow-brutal-sm font-medium ${
                     m.role === "user"
-                      ? "bg-zinc-100 text-zinc-900"
-                      : "bg-zinc-800 text-zinc-200"
+                      ? "bg-foreground text-background"
+                      : "bg-secondary text-foreground"
                   }`}
                 >
                   <ReactMarkdown 
-                    className={`max-w-none text-sm [&>p]:my-0 [&>p]:leading-relaxed [&_strong]:font-bold [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:ml-4 [&_ol]:ml-4 [&_li]:mt-1 ${
+                    className={`max-w-none text-sm [&>p]:my-0 [&>p]:leading-relaxed [&_strong]:font-black [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:ml-4 [&_ol]:ml-4 [&_li]:mt-1 ${
                       m.role === "user" 
-                        ? "text-zinc-900" 
-                        : "text-zinc-200"
+                        ? "text-background" 
+                        : "text-foreground"
                     }`}
                   >
                     {m.content}
@@ -162,13 +164,13 @@ export default function ChatWidget() {
             ))}
             {isLoading && (
               <div className="flex gap-3 max-w-[85%] mr-auto">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground border-2 border-border shadow-brutal-sm flex items-center justify-center">
                   <Bot className="w-4 h-4" />
                 </div>
-                <div className="rounded-2xl px-4 py-2.5 bg-zinc-800 text-zinc-400 text-sm flex items-center gap-1">
-                  <span className="animate-pulse">●</span>
-                  <span className="animate-pulse delay-75">●</span>
-                  <span className="animate-pulse delay-150">●</span>
+                <div className="px-4 py-3 bg-secondary text-foreground border-2 border-border shadow-brutal-sm text-sm font-black flex items-center gap-2">
+                  <span className="animate-bounce">.</span>
+                  <span className="animate-bounce delay-75">.</span>
+                  <span className="animate-bounce delay-150">.</span>
                 </div>
               </div>
             )}
@@ -176,10 +178,10 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-4 bg-zinc-900 border-t border-zinc-800">
+          <form onSubmit={onSubmit} className="p-4 bg-background border-t-4 border-border">
             <div className="relative flex items-center">
               <input
-                className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-zinc-500 transition-all"
+                className="w-full bg-card text-foreground border-4 border-border pl-4 pr-14 py-3 text-sm font-medium focus:outline-none focus:ring-0 placeholder:text-muted-foreground transition-all shadow-[inset_2px_2px_0px_rgba(0,0,0,0.1)] dark:shadow-[inset_2px_2px_0px_rgba(255,255,255,0.1)]"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
@@ -187,7 +189,7 @@ export default function ChatWidget() {
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="absolute right-2 p-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="absolute right-2 p-2 bg-primary text-primary-foreground border-2 border-border shadow-brutal hover:shadow-brutal-sm transition-all hover:translate-x-[2px] hover:translate-y-[2px] disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-brutal"
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -201,10 +203,10 @@ export default function ChatWidget() {
         onClick={() => setIsOpen(!isOpen)}
         className={`${
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
-        } transition-all duration-300 bg-cyan-400 hover:bg-cyan-300 text-zinc-950 px-5 py-3.5 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:scale-105 hover:-translate-y-1 active:scale-95 flex items-center gap-2 font-bold text-sm`}
+        } transition-all duration-300 bg-primary text-primary-foreground border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] px-6 py-4 flex items-center gap-3 font-black uppercase tracking-widest text-sm`}
       >
-        <MessageCircle className="w-5 h-5" />
-        Interview me digitally
+        <MessageCircle className="w-6 h-6" />
+        Interview me
       </button>
     </div>
   )
