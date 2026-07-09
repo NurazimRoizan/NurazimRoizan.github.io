@@ -1,0 +1,1 @@
+import { tool } from 'ai'; import { z } from 'zod'; const t = tool({ description: 'test', parameters: z.object({ a: z.string() }), execute: async (...args) => { console.log('EXECUTE ARGS:', args); return 'done'; } }); async function main() { await (t as any).execute({ a: 'hello' }, {}); } main();

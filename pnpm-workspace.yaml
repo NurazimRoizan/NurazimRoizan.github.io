@@ -1,0 +1,5 @@
+allowBuilds:
+  sharp: set this to true or false
+minimumReleaseAgeExclude:
+  - '@ai-sdk/gateway@3.0.134'
+  - ai@6.0.209
