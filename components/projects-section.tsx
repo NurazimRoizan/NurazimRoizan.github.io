@@ -190,42 +190,47 @@ export default function ProjectsSection() {
 
   return (
     <>
-      <section className="py-20 px-4 bg-gradient-to-b from-background via-secondary/30 to-background">
+      <section className="py-24 px-6 bg-background border-b-4 border-border">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="mb-16 border-l-8 border-primary pl-6">
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-foreground mb-4">Classified<br/>Projects</h2>
+            <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground max-w-2xl">
               A selection of my best work showcasing my skills in full-stack development, design, and problem-solving.
-              Click on any project to learn more.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <Card
-                key={project.id}
-                onClick={() => handleProjectClick(project)}
-                className="group overflow-hidden border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 backdrop-blur-sm glow-border cursor-pointer hover:-translate-y-2"
-              >
-                {/* Project Image */}
-                <div className="relative overflow-hidden h-48 bg-secondary">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  {(project.github || project.live) && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-                      <div className="flex gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
+            {projects.map((project, index) => {
+              // Bento Box Grid Logic
+              let spanClass = "md:col-span-6 lg:col-span-4";
+              if (index === 0) spanClass = "md:col-span-6 lg:col-span-8"; // Featured large
+              else if (index === 1) spanClass = "md:col-span-6 lg:col-span-4"; // Side small
+              else if (index === 3 || index === 4) spanClass = "md:col-span-6 lg:col-span-6"; // Half width
+              
+              return (
+                <Card
+                  key={project.id}
+                  onClick={() => handleProjectClick(project)}
+                  className={`group overflow-hidden bg-card cursor-pointer border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all rounded-none p-0 flex flex-col ${spanClass}`}
+                >
+                  {/* Project Image */}
+                  <div className="relative overflow-hidden border-b-4 border-border bg-muted flex-grow min-h-[250px]">
+                    <img
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                    {(project.github || project.live) && (
+                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         {project.github && (
                           <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="p-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/40 transition-colors"
+                            className="p-2 bg-background border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-foreground"
                           >
-                            <Github size={18} className="text-cyan-400" />
+                            <Github size={20} />
                           </a>
                         )}
                         {project.live && (
@@ -234,48 +239,48 @@ export default function ProjectsSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="p-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/40 transition-colors"
+                            className="p-2 bg-primary border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-primary-foreground"
                           >
-                            <ExternalLink size={18} className="text-cyan-400" />
+                            <ExternalLink size={20} />
                           </a>
                         )}
                       </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs bg-cyan-400/10 text-cyan-400 rounded-full border border-cyan-400/20 glow-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    )}
                   </div>
-                </div>
-              </Card>
-            ))} 
+
+                  {/* Project Info */}
+                  <div className="p-6 bg-card flex-shrink-0">
+                    <h3 className="text-2xl font-black uppercase tracking-tight mb-2 group-hover:text-primary transition-colors text-foreground">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm font-bold text-muted-foreground mb-6 line-clamp-2">{project.description}</p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 text-xs bg-foreground text-background font-black uppercase tracking-widest border-2 border-transparent group-hover:border-primary transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
+              )
+            })} 
           </div>
 
-          <div className="mt-16 text-center flex justify-center">
+          <div className="mt-20 flex justify-center">
             <a 
               href="https://404.jimiroi.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 font-bold text-lg glow-border group hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-3 px-10 py-6 bg-primary text-primary-foreground font-black uppercase tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all group"
             >
               <span>Explore My Creative Portfolio</span>
-              <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ExternalLink size={24} />
             </a>
           </div>
         </div>

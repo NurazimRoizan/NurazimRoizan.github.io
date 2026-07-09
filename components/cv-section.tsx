@@ -105,48 +105,52 @@ const skills = [
 
 export default function CVSection() {
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Professional Background</h2>
-          <p className="text-lg text-muted-foreground">
-            My journey in software development and key achievements throughout my university and career.
+    <section className="py-24 px-6 bg-background">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16 border-l-8 border-primary pl-6">
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-foreground">Service<br/>Record</h2>
+          <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground">
+            A chronological dossier of my technical deployments and academic operations.
           </p>
         </div>
 
         {/* Experience */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <span className="h-1 w-8 bg-gradient-to-r from-cyan-400 to-cyan-300 rounded-full" />
-            Experience
+        <div className="mb-20">
+          <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
+            <span className="h-8 w-4 bg-primary block" />
+            Active Duty / Experience
           </h3>
 
           <div className="space-y-6">
             {experiences.map((exp) => (
               <Card
                 key={exp.id}
-                className="p-6 border-cyan-400/20 hover:border-cyan-400/50 bg-secondary/30 hover:bg-secondary/50 transition-all duration-300"
+                className="p-0 border-4 border-border rounded-none shadow-brutal bg-card flex flex-col md:flex-row overflow-hidden group hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h4 className="text-xl font-bold text-cyan-400">{exp.title}</h4>
-                    <p className="text-muted-foreground">{exp.company}</p>
-                  </div>
-                  <span className="text-sm text-muted-foreground font-mono">{exp.period}</span>
+                {/* Date Block */}
+                <div className="bg-primary text-primary-foreground p-6 md:w-64 flex flex-col justify-center items-start md:border-r-4 md:border-border border-b-4 md:border-b-0 border-border">
+                  <span className="text-sm font-black uppercase tracking-widest">{exp.period}</span>
                 </div>
+                
+                {/* Content Block */}
+                <div className="p-6 md:flex-1">
+                  <h4 className="text-2xl font-black uppercase tracking-tight text-foreground mb-1 group-hover:text-primary transition-colors">{exp.title}</h4>
+                  <p className="text-lg font-bold text-muted-foreground mb-4">{exp.company}</p>
+                  
+                  <p className="text-foreground font-medium leading-relaxed mb-6 border-l-4 border-muted pl-4">
+                    {exp.description}
+                  </p>
 
-                <p className="text-foreground/80 mb-4">{exp.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.skills.map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="secondary"
-                      className="bg-cyan-400/10 text-cyan-400 border-cyan-400/20 hover:bg-cyan-400/20"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-1 text-xs bg-foreground text-background font-black uppercase tracking-widest border-2 border-transparent group-hover:border-primary transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Card>
             ))}
@@ -154,25 +158,29 @@ export default function CVSection() {
         </div>
 
         {/* Education */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <span className="h-1 w-8 bg-gradient-to-r from-cyan-400 to-cyan-300 rounded-full" />
-            Education
+        <div className="mb-20">
+          <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
+            <span className="h-8 w-4 bg-primary block" />
+            Training / Education
           </h3>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {education.map((edu) => (
               <Card
                 key={edu.id}
-                className="p-6 border-cyan-400/20 bg-secondary/30 hover:bg-secondary/50 transition-all duration-300"
+                className="p-6 border-4 border-border rounded-none shadow-brutal bg-card hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
               >
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" />
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary flex-shrink-0 flex items-center justify-center border-2 border-border shadow-brutal">
+                    <CheckCircle2 className="w-6 h-6 text-primary-foreground" />
+                  </div>
                   <div className="flex-1">
-                    <h4 className="text-lg font-bold">{edu.degree}</h4>
-                    <p className="text-cyan-400 font-medium">{edu.school}</p>
-                    <p className="text-sm text-muted-foreground">{edu.details}</p>
-                    <span className="text-xs text-muted-foreground mt-2 block">{edu.year}</span>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-2">
+                      <h4 className="text-xl font-black uppercase tracking-tight text-foreground">{edu.degree}</h4>
+                      <span className="bg-foreground text-background px-3 py-1 font-black text-xs uppercase tracking-widest border-2 border-border shadow-brutal-sm">{edu.year}</span>
+                    </div>
+                    <p className="text-primary font-bold uppercase mb-2">{edu.school}</p>
+                    <p className="text-sm font-medium text-muted-foreground border-t-2 border-border pt-2">{edu.details}</p>
                   </div>
                 </div>
               </Card>
@@ -181,29 +189,30 @@ export default function CVSection() {
         </div>
 
         {/* GitHub Stats */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <span className="h-1 w-8 bg-gradient-to-r from-cyan-400 to-cyan-300 rounded-full" />
-            GitHub Activity
+        <div className="mb-20">
+          <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
+            <span className="h-8 w-4 bg-primary block" />
+            Telemetry / GitHub
           </h3>
-          <GithubStats />
+          <div className="border-4 border-border p-4 bg-card shadow-brutal">
+            <GithubStats />
+          </div>
         </div>
 
         {/* Skills */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <span className="h-1 w-8 bg-gradient-to-r from-cyan-400 to-cyan-300 rounded-full" />
-            Skills
+          <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
+            <span className="h-8 w-4 bg-primary block" />
+            Arsenal / Skills
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {skills.map((skill) => (
               <div
                 key={skill}
-                className="p-4 rounded-lg border border-cyan-400/20 bg-secondary/30 hover:bg-secondary/60 hover:border-cyan-400/50 transition-all duration-300 flex items-center gap-3 group"
+                className="p-4 bg-card border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all flex items-center justify-center text-center group cursor-default"
               >
-                <div className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-150 transition-transform" />
-                <span className="font-medium text-foreground">{skill}</span>
+                <span className="font-black uppercase tracking-tight text-foreground group-hover:text-primary transition-colors text-sm">{skill}</span>
               </div>
             ))}
           </div>

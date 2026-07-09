@@ -7,48 +7,48 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const contactLinks = [
-    { icon: Mail, label: "Email", href: "mailto:rnurazim@gmail.com", color: "text-[#FF8C00] dark:text-cyan-400" },
-    { icon: Github, label: "GitHub", href: "https://github.com/NurazimRoizan", color: "text-[#FF8C00] dark:text-cyan-400" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/nurazimroy", color: "text-[#FF8C00] dark:text-cyan-400" },
-    { icon: MapPin, label: "Strava", href: "/strava", color: "text-orange-500" },
-    { icon: Gamepad2, label: "Steam", href: "https://steamcommunity.com/id/arkxenark", color: "text-[#FF8C00] dark:text-cyan-400" },
+    { icon: Mail, label: "Email", href: "mailto:rnurazim@gmail.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/NurazimRoizan" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/nurazimroy" },
+    { icon: MapPin, label: "Strava", href: "/strava" },
+    { icon: Gamepad2, label: "Steam", href: "https://steamcommunity.com/id/arkxenark" },
   ]
 
   return (
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-4 right-4 z-50 p-2 text-[#FF8C00] dark:text-cyan-400 hover:text-[#FF8C00]/70 dark:hover:text-cyan-300 transition-colors"
+        className="md:hidden fixed top-4 right-4 z-50 p-2 text-primary hover:text-foreground transition-colors border-2 border-border bg-background shadow-brutal"
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Desktop Sidebar - compact layout without scrolling */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-screen w-72 bg-gradient-to-b from-secondary/80 to-background border-r border-[#FF8C00]/20 dark:border-cyan-400/20 p-6 z-30 flex-col justify-between">
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:flex fixed left-0 top-0 h-screen w-72 bg-background border-r-4 border-border p-6 z-30 flex-col justify-between overflow-y-auto">
         <div>
           <div className="text-center">
             {/* Profile Picture */}
-            <div className="mb-5 flex justify-center">
+            <div className="mb-6 flex justify-center">
               <img
                 src="/professional-portrait.jpg"
                 alt="Profile"
-                className="w-45 h-45 rounded-full border-4 border-[#FF8C00]/30 dark:border-cyan-400/30 object-cover profile-glow"
+                className="w-40 h-40 rounded-none border-4 border-border shadow-brutal object-cover grayscale hover:grayscale-0 transition-all duration-300"
               />
             </div>
 
             {/* Name */}
-            <h1 className="text-xl font-bold mb-1">Nurazim Roizan</h1>
+            <h1 className="text-2xl font-black uppercase tracking-tighter mb-1 text-foreground">Nurazim Roizan</h1>
 
             {/* Job Title */}
-            <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm mb-5">96% Front-End Developer, 4% Dark Mode Enthusiast.</p>
+            <p className="text-primary font-bold text-sm mb-6 uppercase tracking-tight">96% Front-End Developer<br/>4% Dark Mode Enthusiast</p>
 
-            {/* Favorite Quote - Compact */}
-            <p className="text-muted-foreground italic text-xs leading-relaxed mb-6 p-3 border-l-2 border-orange-500 bg-secondary/50 rounded-r">
-              "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt. -Jake Peralta B99"
+            {/* Favorite Quote */}
+            <p className="text-muted-foreground font-medium text-xs leading-relaxed mb-8 p-4 border-l-4 border-primary bg-secondary text-left">
+              "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt."<br/><span className="text-foreground font-bold mt-2 block">— Jake Peralta B99</span>
             </p>
 
-            {/* Contact Links - Icon + Label in rows */}
-            <div className="flex flex-col gap-2">
+            {/* Contact Links */}
+            <div className="flex flex-col gap-3">
               {contactLinks.map((link) => {
                 const Icon = link.icon
                 return (
@@ -59,10 +59,10 @@ export default function Sidebar() {
                     rel={
                       link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "noopener noreferrer"
                     }
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary/50 hover:bg-secondary border border-[#FF8C00]/20 dark:border-cyan-400/20 hover:border-[#FF8C00]/50 dark:hover:border-cyan-400/50 transition-all group text-sm glow-border"
+                    className="flex items-center gap-3 px-4 py-3 bg-card border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all group text-sm uppercase font-bold"
                   >
-                    <Icon size={18} className={link.color} />
-                    <span className="font-medium group-hover:text-[#FF8C00] dark:group-hover:text-cyan-400 transition-colors">{link.label}</span>
+                    <Icon size={20} className="text-foreground group-hover:text-primary transition-colors" />
+                    <span className="text-foreground group-hover:text-primary transition-colors tracking-wide">{link.label}</span>
                   </a>
                 )
               })}
@@ -71,37 +71,30 @@ export default function Sidebar() {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-xs text-muted-foreground">
+        <div className="text-center text-xs text-foreground font-bold uppercase tracking-wider mt-8 pt-6 border-t-4 border-border">
           <p>© 2026 Nurazim Roizan</p>
-          <p className="mt-1">Crafted with passion and cheese</p>
+          <p className="mt-2 text-muted-foreground">Crafted with passion<br/>and cheese</p>
         </div>
       </aside>
 
-      {/* Mobile Dropdown Menu - appears from top-right */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="md:hidden fixed top-16 right-4 w-72 bg-secondary/95 backdrop-blur-sm border border-[#FF8C00]/30 dark:border-cyan-400/30 rounded-lg shadow-2xl p-5 z-40 glow-border">
-          <div className="text-center space-y-4">
-            {/* Profile Picture */}
+        <div className="md:hidden fixed top-16 right-4 w-[calc(100vw-2rem)] max-w-sm bg-background border-4 border-border shadow-brutal p-6 z-40 overflow-y-auto max-h-[80vh]">
+          <div className="text-center space-y-6">
             <div className="flex justify-center">
               <img
                 src="/professional-portrait.jpg"
                 alt="Profile"
-                className="w-20 h-20 rounded-full border-3 border-[#FF8C00]/30 dark:border-cyan-400/30 object-cover profile-glow"
+                className="w-24 h-24 rounded-none border-4 border-border shadow-brutal object-cover grayscale"
               />
             </div>
 
-            {/* Name */}
             <div>
-              <h2 className="text-lg font-bold">Nurazim Roizan</h2>
-              <p className="text-[#FF8C00] dark:text-cyan-400 font-semibold text-sm">96% Front-End Developer, 4% Dark Mode Enthusiast.</p>
+              <h2 className="text-xl font-black uppercase tracking-tighter text-foreground">Nurazim Roizan</h2>
+              <p className="text-primary font-bold text-xs uppercase tracking-tight mt-1">96% Front-End Developer</p>
             </div>
 
-            {/* Favorite Quote */}
-            <p className="text-muted-foreground italic text-xs leading-relaxed p-3 border-l-2 border-orange-500 bg-secondary/50 rounded-r">
-              "Code is poetry written in a language computers understand."
-            </p>
-
-            <div className="flex flex-col gap-2 pt-2">
+            <div className="flex flex-col gap-3">
               {contactLinks.map((link) => {
                 const Icon = link.icon
                 return (
@@ -112,26 +105,21 @@ export default function Sidebar() {
                     rel={
                       link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "noopener noreferrer"
                     }
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary/50 hover:bg-secondary border border-[#FF8C00]/20 dark:border-cyan-400/20 hover:border-[#FF8C00]/50 dark:hover:border-cyan-400/50 transition-all group text-sm"
+                    className="flex items-center justify-center gap-3 px-4 py-3 bg-card border-2 border-border shadow-brutal active:shadow-brutal-sm active:translate-x-[2px] active:translate-y-[2px] transition-all group text-sm uppercase font-bold"
                     onClick={() => setIsOpen(false)}
                   >
-                    <Icon size={18} className={link.color} />
-                    <span className="font-medium group-hover:text-[#FF8C00] dark:group-hover:text-cyan-400 transition-colors">{link.label}</span>
+                    <Icon size={18} className="text-foreground" />
+                    <span className="text-foreground tracking-wide">{link.label}</span>
                   </a>
                 )
               })}
-            </div>
-
-            {/* Footer */}
-            <div className="text-center text-xs text-muted-foreground pt-3 border-t border-[#FF8C00]/10 dark:border-cyan-400/10">
-              <p>© 2026 Nurazim Roizan</p>
             </div>
           </div>
         </div>
       )}
 
       {/* Mobile Overlay */}
-      {isOpen && <div className="md:hidden fixed inset-0 z-20" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div className="md:hidden fixed inset-0 z-20 bg-background/80 backdrop-blur-sm" onClick={() => setIsOpen(false)} />}
     </>
   )
 }

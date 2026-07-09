@@ -6,81 +6,61 @@ import { trackEvent } from "@/components/analytics"
 
 export default function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-16 px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl animate-pulse" />
-        </div>
+    <section className="relative min-h-screen flex items-center justify-center pt-16 px-6 border-b-4 border-border overflow-hidden bg-background">
+      {/* Harsh Halftone Dot Pattern */}
+      <div 
+        className="absolute inset-0 z-0 opacity-20 dark:opacity-40"
+        style={{
+          backgroundImage: "radial-gradient(circle at 2px 2px, currentColor 2px, transparent 0)",
+          backgroundSize: "32px 32px"
+        }}
+      />
 
-        <div className="mb-8 inline-block">
-          <div className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-sm font-medium glow-border">
-            Welcome Humans
+      <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col items-start text-left">
+        <div className="mb-8">
+          <div className="inline-block px-4 py-2 border-2 border-border bg-card shadow-brutal text-foreground font-black uppercase tracking-widest text-sm">
+            System Online
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          I build handsome{" "}
-          <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent">
-            digital experiences
+        <h1 className="text-6xl sm:text-8xl md:text-[9rem] font-black uppercase tracking-tighter leading-[0.85] mb-8 text-foreground mix-blend-difference">
+          Nurazim
+          <br />
+          <span className="text-primary block transform -skew-x-6 mt-2">
+            Roizan
           </span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          I'm a developer specializing of making technology comply with my comfort level to solve micro-inefficiencies in life.
-        </p>
+        <div className="bg-card border-l-8 border-primary p-6 shadow-brutal mb-12 max-w-2xl">
+          <p className="text-xl md:text-2xl font-bold uppercase tracking-tight text-foreground leading-snug">
+            I force technology to comply with my comfort level to solve micro-inefficiencies in life.
+          </p>
+        </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-6">
           <Button
             onClick={() => {
               trackEvent("view_work_click")
               document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="px-8 py-6 bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-600 hover:to-cyan-500 text-black font-semibold rounded-lg flex items-center justify-center gap-2 group shadow-lg glow-border-strong hover:scale-105 active:scale-95 transition-all"
+            className="px-10 py-8 bg-primary hover:bg-primary text-primary-foreground text-xl uppercase font-black tracking-widest flex items-center justify-center gap-3 border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
           >
-            View My Work
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            Access Files
+            <ArrowRight size={28} />
           </Button>
           <Button
             asChild
             variant="outline"
-            className="px-8 py-6 border-cyan-400/30 text-foreground hover:bg-cyan-400/10 hover:text-cyan-400 bg-transparent glow-border hover:scale-105 active:scale-95 transition-all"
+            className="px-10 py-8 bg-card text-foreground text-xl uppercase font-black tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
           >
             <a 
               href="/Nurazim_Roizan_CV.pdf" 
               download="Nurazim_Roizan_CV.pdf"
               onClick={() => trackEvent("resume_download")}
             >
-              Download CV
+              Download Dossier
             </a>
           </Button>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex gap-4 justify-center">
-          <a
-            href="https://github.com/NurazimRoizan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
-          >
-            <Github size={24} className="text-cyan-400" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/nurazimroy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
-          >
-            <Linkedin size={24} className="text-cyan-400" />
-          </a>
-          <a
-            href="mailto:rnurazim@gmail.com"
-            className="p-3 rounded-lg bg-secondary/50 hover:bg-cyan-400/10 border border-cyan-400/20 transition-all duration-300 hover:border-cyan-400/50 glow-border hover:-translate-y-1 hover:scale-110 active:scale-95"
-          >
-            <Mail size={24} className="text-cyan-400" />
-          </a>
         </div>
       </div>
     </section>
