@@ -193,32 +193,26 @@ export default function ProjectsSection() {
       <section className="py-24 px-6 bg-background border-b-4 border-border">
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 border-l-8 border-primary pl-6">
-            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-foreground mb-4">Classified<br/>Projects</h2>
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-foreground mb-4">Featured<br/>Projects</h2>
             <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground max-w-2xl">
               A selection of my best work showcasing my skills in full-stack development, design, and problem-solving.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
+          <div className="space-y-12">
             {projects.map((project, index) => {
-              // Bento Box Grid Logic
-              let spanClass = "md:col-span-6 lg:col-span-4";
-              if (index === 0) spanClass = "md:col-span-6 lg:col-span-8"; // Featured large
-              else if (index === 1) spanClass = "md:col-span-6 lg:col-span-4"; // Side small
-              else if (index === 3 || index === 4) spanClass = "md:col-span-6 lg:col-span-6"; // Half width
-              
               return (
                 <Card
                   key={project.id}
                   onClick={() => handleProjectClick(project)}
-                  className={`group overflow-hidden bg-card cursor-pointer border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all rounded-none p-0 flex flex-col ${spanClass}`}
+                  className={`group overflow-hidden bg-card cursor-pointer border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all rounded-none p-0 flex flex-col md:flex-row h-auto md:h-[400px]`}
                 >
                   {/* Project Image */}
-                  <div className="relative overflow-hidden border-b-4 border-border bg-muted flex-grow min-h-[250px]">
+                  <div className="relative overflow-hidden border-b-4 md:border-b-0 md:border-r-4 border-border bg-muted w-full md:w-2/5 flex-shrink-0">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      className="w-full h-full object-cover transition-all duration-500"
                     />
                     {(project.github || project.live) && (
                       <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -249,18 +243,18 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* Project Info */}
-                  <div className="p-6 bg-card flex-shrink-0">
-                    <h3 className="text-2xl font-black uppercase tracking-tight mb-2 group-hover:text-primary transition-colors text-foreground">
+                  <div className="p-8 md:p-10 bg-card flex-grow flex flex-col justify-center">
+                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors text-foreground">
                       {project.title}
                     </h3>
-                    <p className="text-sm font-bold text-muted-foreground mb-6 line-clamp-2">{project.description}</p>
+                    <p className="text-lg font-bold text-muted-foreground mb-8 line-clamp-3 leading-relaxed">{project.description}</p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-foreground text-background font-black uppercase tracking-widest border-2 border-transparent group-hover:border-primary transition-colors"
+                          className="px-3 py-1 text-sm bg-foreground text-background font-black uppercase tracking-widest border-2 border-transparent group-hover:border-primary transition-colors"
                         >
                           {tag}
                         </span>

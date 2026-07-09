@@ -32,7 +32,7 @@ export default function Sidebar() {
               <img
                 src="/professional-portrait.jpg"
                 alt="Profile"
-                className="w-40 h-40 rounded-none border-4 border-border shadow-brutal object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-40 h-40 rounded-none border-4 border-border shadow-brutal object-cover"
               />
             </div>
 
@@ -85,7 +85,7 @@ export default function Sidebar() {
               <img
                 src="/professional-portrait.jpg"
                 alt="Profile"
-                className="w-24 h-24 rounded-none border-4 border-border shadow-brutal object-cover grayscale"
+                className="w-24 h-24 rounded-none border-4 border-border shadow-brutal object-cover"
               />
             </div>
 

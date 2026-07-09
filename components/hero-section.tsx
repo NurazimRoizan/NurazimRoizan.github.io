@@ -19,7 +19,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col items-start text-left">
         <div className="mb-8">
           <div className="inline-block px-4 py-2 border-2 border-border bg-card shadow-brutal text-foreground font-black uppercase tracking-widest text-sm">
-            System Online
+            Welcome
           </div>
         </div>
 
@@ -45,7 +45,7 @@ export default function HeroSection() {
             }}
             className="px-10 py-8 bg-primary hover:bg-primary text-primary-foreground text-xl uppercase font-black tracking-widest flex items-center justify-center gap-3 border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
           >
-            Access Files
+            View My Work
             <ArrowRight size={28} />
           </Button>
           <Button
@@ -58,7 +58,7 @@ export default function HeroSection() {
               download="Nurazim_Roizan_CV.pdf"
               onClick={() => trackEvent("resume_download")}
             >
-              Download Dossier
+              Download CV
             </a>
           </Button>
         </div>

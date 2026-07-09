@@ -108,9 +108,9 @@ export default function CVSection() {
     <section className="py-24 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="mb-16 border-l-8 border-primary pl-6">
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-foreground">Service<br/>Record</h2>
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-foreground">Curriculum<br/>Vitae</h2>
           <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground">
-            A chronological dossier of my technical deployments and academic operations.
+            A timeline of my academic and professional journey.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function CVSection() {
         <div className="mb-20">
           <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
             <span className="h-8 w-4 bg-primary block" />
-            Active Duty / Experience
+            Experience
           </h3>
 
           <div className="space-y-6">
@@ -161,7 +161,7 @@ export default function CVSection() {
         <div className="mb-20">
           <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
             <span className="h-8 w-4 bg-primary block" />
-            Training / Education
+            Education
           </h3>
 
           <div className="space-y-6">
@@ -192,7 +192,7 @@ export default function CVSection() {
         <div className="mb-20">
           <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
             <span className="h-8 w-4 bg-primary block" />
-            Telemetry / GitHub
+            GitHub Activity
           </h3>
           <div className="border-4 border-border p-4 bg-card shadow-brutal">
             <GithubStats />
@@ -203,7 +203,7 @@ export default function CVSection() {
         <div>
           <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 text-foreground">
             <span className="h-8 w-4 bg-primary block" />
-            Arsenal / Skills
+            Skills
           </h3>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
