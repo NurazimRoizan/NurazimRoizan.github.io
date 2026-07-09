@@ -42,16 +42,22 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop (Visual only) */}
       <div
         className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
-        onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto pt-10">
-        <div className="relative bg-card border-4 border-border shadow-brutal max-w-4xl w-full flex flex-col my-auto">
+      {/* Modal Wrapper */}
+      <div 
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto pt-10"
+        onClick={onClose}
+      >
+        {/* Modal Card */}
+        <div 
+          className="relative bg-card border-4 border-border shadow-brutal max-w-4xl w-full flex flex-col my-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           
           {/* Close Button */}
           <button
@@ -64,7 +70,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {/* Project Image Panel (Top) */}
           <div className="w-full border-b-4 border-border flex-shrink-0 bg-muted">
-            <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-64 md:h-[400px] object-cover" />
+            <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-40 md:h-56 object-cover" />
           </div>
 
           {/* Content Panel (Bottom) - Scrollable */}
