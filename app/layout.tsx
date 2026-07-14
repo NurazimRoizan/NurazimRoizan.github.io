@@ -13,25 +13,40 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Professional portfolio and project showcase",
-  generator: "v0.app",
-  icons: {
-    icon: [
+  title: {
+    default: "Nurazim Roizan | Portfolio",
+    template: "%s | Nurazim Roizan"
+  },
+  description: "Professional portfolio and project showcase of Nurazim Roizan, a digital builder creating functional and beautiful experiences.",
+  keywords: ["Nurazim Roizan", "Portfolio", "Software Engineer", "Web Developer", "Neo-Brutalism"],
+  authors: [{ name: "Nurazim Roizan" }],
+  creator: "Nurazim Roizan",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://portfolio.jimiroi.com",
+    title: "Nurazim Roizan | Portfolio",
+    description: "Professional portfolio and project showcase of Nurazim Roizan.",
+    siteName: "Nurazim Roizan Portfolio",
+    images: [
       {
-        url: "/logokecik.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/logokecik.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/G_logo.svg",
-        type: "image/svg+xml",
+        url: "/jimiroi_logo.svg",
+        width: 1200,
+        height: 630,
+        alt: "Nurazim Roizan Portfolio",
       },
     ],
-    apple: "/logokecik.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nurazim Roizan | Portfolio",
+    description: "Professional portfolio and project showcase of Nurazim Roizan.",
+    images: ["/jimiroi_logo.svg"],
+  },
+  icons: {
+    icon: "/jimiroi_logo.svg",
+    shortcut: "/jimiroi_logo.svg",
+    apple: "/jimiroi_logo.svg",
   },
 }
 
