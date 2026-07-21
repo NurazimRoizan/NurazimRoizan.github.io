@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Mail, Github, Linkedin, MapPin, Gamepad2 } from "lucide-react"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
 
@@ -16,6 +16,14 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
     { id: "home", label: "Home" },
     { id: "projects", label: "Projects" },
     { id: "cv", label: "CV" },
+  ]
+
+  const contactLinks = [
+    { icon: Mail, label: "Email", href: "mailto:rnurazim@gmail.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/NurazimRoizan" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/nurazimroy" },
+    { icon: MapPin, label: "Strava", href: "/strava" },
+    { icon: Gamepad2, label: "Steam", href: "https://steamcommunity.com/id/arkxenark" },
   ]
 
   return (
@@ -71,9 +79,26 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden border-t-4 border-border bg-card">
+        <div className="md:hidden border-t-4 border-border bg-card max-h-[85vh] overflow-y-auto">
+          {/* Profile Identity (Mobile Only) */}
+          <div className="p-6 border-b-4 border-border bg-secondary flex flex-col items-center">
+             <img src="/professional-portrait.jpg" alt="Profile" className="w-24 h-24 border-4 border-border shadow-brutal object-cover mb-4" />
+             <h2 className="text-2xl font-black uppercase tracking-tighter text-foreground text-center">Nurazim Roizan</h2>
+             <p className="text-primary font-bold text-xs uppercase tracking-tight mt-1 mb-6 text-center">96% Front-End Developer<br/>4% Dark Mode Enthusiast</p>
+             <div className="flex flex-wrap justify-center gap-3 w-full">
+               {contactLinks.map((link) => {
+                 const Icon = link.icon
+                 return (
+                   <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "_blank"} rel={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "noopener noreferrer"} className="flex items-center justify-center p-3 bg-card border-2 border-border shadow-brutal active:shadow-brutal-sm active:translate-x-[2px] active:translate-y-[2px] transition-all">
+                     <Icon size={20} className="text-foreground" />
+                   </a>
+                 )
+               })}
+             </div>
+          </div>
+
           <div className="flex flex-col p-4 gap-4">
             {navItems.map((item) => (
               <Link

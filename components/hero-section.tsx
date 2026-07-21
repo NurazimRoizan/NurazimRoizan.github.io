@@ -43,20 +43,21 @@ export default function HeroSection() {
               trackEvent("view_work_click")
               document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="px-10 py-8 bg-primary hover:bg-primary text-primary-foreground text-xl uppercase font-black tracking-widest flex items-center justify-center gap-3 border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+            className="px-6 md:px-10 py-4 md:py-8 bg-primary hover:bg-primary text-primary-foreground text-lg md:text-xl uppercase font-black tracking-widest flex items-center justify-center gap-3 border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
           >
             View My Work
-            <ArrowRight size={28} />
+            <ArrowRight size={24} className="md:w-7 md:h-7" />
           </Button>
           <Button
             asChild
             variant="outline"
-            className="px-10 py-8 bg-card text-foreground text-xl uppercase font-black tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+            className="px-6 md:px-10 py-4 md:py-8 bg-card text-foreground text-lg md:text-xl uppercase font-black tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all text-center"
           >
             <a 
               href="/Nurazim_Roizan_CV.pdf" 
               download="Nurazim_Roizan_CV.pdf"
               onClick={() => trackEvent("resume_download")}
+              className="w-full h-full flex items-center justify-center"
             >
               Download CV
             </a>

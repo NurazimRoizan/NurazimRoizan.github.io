@@ -243,8 +243,8 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* Project Info */}
-                  <div className="p-8 md:p-10 bg-card flex-grow flex flex-col justify-center">
-                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors text-foreground">
+                  <div className="p-6 md:p-10 bg-card flex-grow flex flex-col justify-center">
+                    <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors text-foreground break-words">
                       {project.title}
                     </h3>
                     <p className="text-lg font-bold text-muted-foreground mb-8 line-clamp-3 leading-relaxed">{project.description}</p>
@@ -271,10 +271,10 @@ export default function ProjectsSection() {
               href="https://404.jimiroi.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-10 py-6 bg-primary text-primary-foreground font-black uppercase tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all group"
+              className="flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-4 md:py-6 bg-primary text-primary-foreground font-black uppercase tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all group w-full max-w-sm md:max-w-none text-center"
             >
-              <span>Explore My Creative Portfolio</span>
-              <ExternalLink size={24} />
+              <span className="text-sm md:text-base break-words">Explore My Creative Portfolio</span>
+              <ExternalLink size={24} className="hidden md:block flex-shrink-0" />
             </a>
           </div>
         </div>
