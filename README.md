@@ -1,61 +1,30 @@
-# Nurazim Roizan Portfolio
+# Nurazim Roizan — Professional Portfolio
 
-Professional portfolio and project showcase built with Next.js, featuring Strava activity integration and a dynamic theme system.
+[![Live Site](https://img.shields.io/badge/Live_Site-portfolio.jimiroi.com-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio.jimiroi.com)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-## 🚀 Getting Started
+A professional portfolio showcasing engineering projects, technical experience, and interactive digital interfaces built with modern web technologies.
 
-To run the project locally, follow these steps:
+## 🔗 Live Application
 
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+The portfolio is deployed and actively maintained at: **[portfolio.jimiroi.com](https://portfolio.jimiroi.com)**
 
-2. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+## 🏗️ Architecture & Features
 
-## 🏃 Strava Integration
+This application utilizes a strict Neo-Brutalist design language to ensure maximum accessibility, contrast, and visual hierarchy.
 
-This portfolio project fetches and displays recent Strava activities. 
+- **Digital Clone (AI Chat Integration)**: An embedded AI assistant powered by the Vercel AI SDK and Google Gemini that provides interactive responses regarding professional experience, and securely routes incoming email inquiries via the Resend API.
+- **Strava Telemetry**: Automated fetching and rendering of recent athletic activities utilizing the Strava API, ensuring the live application displays dynamic, up-to-date data.
+- **Custom Theming Engine**: A bespoke CSS implementation extending Tailwind's capabilities to manage complex dark/light mode inversions, automatically swapping accent colors and structural borders.
+- **Interactive UI Patterns**: Custom pointer tracking utilizing CSS `mix-blend-difference`, continuous scrolling CSS marquees, and responsive modal structures.
 
-> [!IMPORTANT]
-> **To update the Strava activities manually, run this command:**
-> ```bash
-> node scripts/strava-fetch.js
-> ```
-> *Note: This script is also automatically triggered as a `prebuild` step when running `npm run build`.*
+## 🛠️ Technology Stack
 
-## 🎨 Features
-
-- **Theme Toggle**: Switch between Dark Mode (Cyan accent) and Light Mode (White/Orange accent) via the navbar.
-- **Responsive Design**: Fully optimized for mobile with a custom hamburger menu.
-- **Strava Dashboard**: Visual representation of recent cycling/running activities.
-- **Projects Showcase**: Interactive modal views for detailed project information.
-
-## 🛠️ Tech Stack
-
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Components**: [Lucide React](https://lucide.dev/), [Radix UI](https://www.radix-ui.com/)
-- **Theming**: [next-themes](https://github.com/pacocoursey/next-themes)
-- **Deployment**: GitHub Pages
-
-## 📖 Deployment
-
-The site is currently hosted at: [https://nurazimroizan.github.io](https://nurazimroizan.github.io)
-
-To deploy updates to GitHub Pages:
-```bash
-npm run build
-# The build process produces a static export in the 'out' directory
-```
-
-## 📝 Environment Variables
-
-Ensure you have a `.env.local` file with the following keys for Strava integration:
-- `STRAVA_CLIENT_ID`
-- `STRAVA_CLIENT_SECRET`
-- `STRAVA_REFRESH_TOKEN`
+- **Core Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **APIs & Integrations**: Strava API, Google Generative AI (Gemini), Resend API
+- **Deployment Platform**: Vercel
