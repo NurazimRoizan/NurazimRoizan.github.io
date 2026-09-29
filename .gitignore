@@ -3,3 +3,7 @@ node_modules
 .env
 .env.local
 .env.*.local
+cv/rendercv_output/
+cv/**/*.typ
+cv/**/*.html
+cv/**/*.png

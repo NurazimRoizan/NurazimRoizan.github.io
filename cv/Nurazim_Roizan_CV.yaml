@@ -1,0 +1,112 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: MUHAMMAD NURAZIM BIN ROIZAN
+  email: rnurazim@gmail.com
+  phone: "+60 11 1061 8648"
+  website: https://jimiroi.com
+  social_networks:
+    - network: LinkedIn
+      username: nurazimroy
+    - network: GitHub
+      username: NurazimRoizan
+  sections:
+    SUMMARY:
+      - Results-driven Software Developer with a BSc in Computer Science from the University of Sheffield and proven experience building high-performance web and mobile applications. Combines enterprise SaaS engineering at Softinn Solutions (Angular, C#) with modern full-stack shipping (React Native, Next.js, Supabase, PostgreSQL). Passionate about responsive architectures, fluid code-driven micro-interactions, and AI-accelerated workflows.
+    PROFESSIONAL EXPERIENCE:
+      - company: Softinn Solutions (Hotel SaaS Provider)
+        position: Front-End Developer
+        start_date: 2026-02
+        end_date: present
+        location: Malaysia
+        highlights:
+          - Spearheaded front-end development and feature optimization across a comprehensive suite of hospitality SaaS products (Booking Engine, PMS, CMS, and Hotel Portal) using Angular, Bootstrap, Metronic, and C# backend APIs.
+          - Engineered responsive, user-centric interfaces resolving complex hotel operational bottlenecks in an Agile Scrum environment.
+          - Collaborated closely with cross-functional teams to streamline guest reservation workflows and booking conversion funnels.
+    EDUCATION:
+      - institution: University of Sheffield
+        area: Computer Science
+        degree: BSc (Hons)
+        start_date: 2022-09
+        end_date: 2025-07
+        location: Sheffield, United Kingdom
+        highlights:
+          - 'Class: Two Division One Honours (2:1)'
+          - 'Relevant Modules: Advanced Algorithms, 3D Computer Graphics, Cybersecurity in Action, Internet of Things, Software Testing and Analysis, Robotics, Logic in Computer Science'
+      - institution: INTEC Education College
+        area: Cambridge International A Levels
+        degree: A Levels
+        start_date: 2020-05
+        end_date: 2022-05
+        location: Malaysia
+        highlights:
+          - 'Grades: Computer Science (A*), Mathematics (A*), Physics (A*), Further Mathematics (A)'
+      - institution: Sekolah Sultan Alam Shah
+        area: Malaysian Certificate of Education (SPM)
+        degree: High School Diploma
+        start_date: 2015-01
+        end_date: 2019-09
+        location: Putrajaya, Malaysia
+        highlights:
+          - 'Grades: 6A+, 3A (including GCE O-Level English-1119)'
+    TECHNICAL SKILLS:
+      - label: Programming Languages
+        details: TypeScript, JavaScript, Java, C#, C++, Ruby, Python, Embedded C, SQL, Haskell
+      - label: Web & Mobile Development
+        details: React Native, Expo, Next.js, Angular, React, Tailwind CSS, Bootstrap, HTML5/CSS3, Three.js
+      - label: Backend & Cloud
+        details: Node.js, Ruby on Rails, Supabase (Postgres & Realtime), Prisma, Firebase, Docker, Vercel
+      - label: Testing & QA
+        details: Black-Box & White-Box Testing, Boundary Value Analysis, Test Automation, Jest
+      - label: Hardware & IoT
+        details: ESP32, ESP32-S3, Arduino, NimBLE, PlatformIO, IMU Sensor Integration, Embedded Firmware
+    FEATURED PROJECTS:
+      - name: Wallo — Collaborative Real-Time Sticker Canvas
+        summary: React Native, Expo, Supabase Realtime, Zustand, Reanimated, RevenueCat
+        date: 2026
+        highlights:
+          - Engineered a real-time collaborative mobile application featuring persistent digital canvases synchronized across devices via Supabase Realtime PostgreSQL feeds.
+          - Architected a GPU-accelerated in-tree Reanimated overlay router managing 26 modal archetypes at 60/120 FPS, replacing native OS dialogs to eliminate window inflation overhead.
+          - Implemented a True Center-Origin (0, 0) coordinate system for non-destructive canvas resizing (2K to 4K), dual-photo stickers, and two-dimensional tier monetization via RevenueCat.
+      - name: PiYak — Gamified PWA Bodily Function Tracker
+        summary: Next.js 15, TypeScript, Clerk Auth, Prisma, PostgreSQL, Web Push
+        date: 2026
+        highlights:
+          - Built a full-stack Progressive Web App with Next.js App Router, Clerk authentication, PostgreSQL via Prisma, and Vercel Cron jobs.
+          - Implemented offline service worker caching, Web Push notifications, a 18-badge achievement progression engine, and Spotify-Wrapped-style monthly telemetry.
+          - Established strict AGENTS.md rules codifying async auth middleware patterns, SEO route whitelisting, and IDOR protection.
+      - name: Interactive Visualization for Graph Theory (Dissertation)
+        summary: Java, Java Swing, GraphStream, OOP Design Patterns
+        date: 2024-09 – 2025-05
+        highlights:
+          - Designed and implemented a standalone desktop visualization tool in Java to simulate the k-Pebble Game and 1-Weisfeiler-Leman (1-WL) Graph Isomorphism algorithms.
+          - Engineered an interactive GUI utilizing Java Swing and GraphStream for dynamic graph rendering, demystifying abstract theoretical computer science concepts.
+      - name: Software Hut — Client-Facing E-commerce Web Application
+        summary: Ruby on Rails, PostgreSQL, Agile (Scrum/XP), Git
+        date: 2024 – 2025
+        highlights:
+          - Engineered and deployed a full-stack e-commerce web platform in an Agile Scrum team collaborating directly with an external commercial client.
+          - Managed end-to-end software delivery from Software Requirements Specification (SRS) to automated testing and deployment.
+      - name: GeeyBoard — Couch-Potato BLE & IR Remote Controller
+        summary: ESP32-S3, C / C++, NimBLE, PlatformIO, Hardware IoT
+        date: 2024
+        highlights:
+          - Custom ESP32-S3 BLE media controller and Infrared TV blaster with instant sloth-mode reconnect to navigate media and control TV power without leaving the couch.
+    PORTFOLIO:
+      - name: "[portfolio.jimiroi.com](https://portfolio.jimiroi.com)"
+        highlights:
+          - A professional portfolio showcasing engineering projects, technical experience, and interactive digital interfaces built with modern web technologies. Themes are custom made by me. Integrated with AI chatbot and Strava API.
+
+design:
+  theme: engineeringresumes
+  page:
+    size: a4
+    show_footer: true
+    top_margin: 1.8cm
+    bottom_margin: 1.8cm
+    left_margin: 1.8cm
+    right_margin: 1.8cm
+  typography:
+    font_size:
+      body: 10pt
+  templates:
+    footer: "NAME - Page PAGE_NUMBER of TOTAL_PAGES"

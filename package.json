@@ -5,6 +5,7 @@
   "homepage": "https://nurazimroizan.github.io",
   "scripts": {
     "prebuild": "node scripts/strava-fetch.js",
+    "build:cv": "node scripts/build-cv.js",
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
