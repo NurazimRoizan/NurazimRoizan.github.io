@@ -88,10 +88,13 @@ const education: Education[] = [
 const skills = [
   "JavaScript",
   "TypeScript",
+  "React Native",
+  "Expo",
   "Angular",
   "C#",
   "React",
   "Next.js",
+  "Supabase",
   "Node.js",
   "Java",
   "Ruby on Rails",

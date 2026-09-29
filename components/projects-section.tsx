@@ -23,6 +23,27 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 9,
+    title: "Wallo - Collaborative Real-Time Sticker Canvas",
+    description: "An interactive, collaborative mobile & web platform where users explore persistent virtual spaces, slap customizable stickers, and sync live across devices with custom monetization and venue branding.",
+    overview: "Wallo is a real-time collaborative digital canvas and living guestbook designed for events, physical venues, and online communities. Users enter a persistent canvas, customize stickers (polaroids, pixel stamps, photo booth strips), and leave their mark. Powered by a True Center-Origin coordinate system, Wallo supports seamless board expansion from 2K to 4K dimensions, live Supabase Realtime synchronization, tactile physics, and dynamic host administration.",
+    workingPrinciple: "The core architecture leverages React Native with Expo and Supabase Realtime PostgreSQL feeds to deliver instant multiplayer synchronization. Wallo replaces native OS dialogs with a GPU-accelerated in-tree Reanimated overlay system (useModalStore) running spring animations at 60/120 FPS without Android WindowManager latency. It features a two-dimensional tier hierarchy: individual player progression (Guest, Regular, VIP Party Pass) and per-canvas superpowers (Creator, Owner lifetime 4K expansion, and Partner commercial venue branding engines with RevenueCat in-app subscriptions).",
+    lessons: "Engineering a real-time collaborative canvas required solving complex distributed state synchronization and coordinate geometry. Transitioning to a Center-Origin (0,0) coordinate system was crucial to ensure non-destructive canvas expansion without shifting placed stickers. Furthermore, bypassing native OS modals in favor of GPU-accelerated in-tree overlays proved essential for maintaining locked 120 FPS performance on mobile devices during rapid sticker drops.",
+    tags: ["React Native", "Expo", "TypeScript", "Supabase", "Zustand", "Reanimated", "RevenueCat"],
+    image: "/walloIcon.jpg",
+    live: "https://wallo.jimiroi.com",
+    features: [
+      "Collaborative Real-Time Canvas: Synchronized sticker placement across iOS, Android, and web via Supabase Realtime.",
+      "True Center-Origin Coordinate Engine: Non-destructive canvas expansion (2,000x2,000 to 4,000x4,000 px) anchoring all stickers to origin (0,0).",
+      "GPU-Accelerated In-Tree Overlays: Fluid 60/120 FPS spring physics managing 26 modal archetypes without native OS frame drops.",
+      "Two-Dimensional Monetization: Individual VIP passes and Canvas Host commercial venue tiers powered by RevenueCat.",
+      "Mystery Vault & Tactical Power-Ups: Daily gacha dispenser with hardware anti-tamper tracking and interactive sticker buffs.",
+      "Custom Venue Ads Engine: Commercial venue hosts configure Washi tape branding, tabletop QR standees, and edge billboards."
+    ],
+    duration: "Production Mobile & Web App",
+    role: "Creator & Lead Engineer",
+  },
+  {
     id: 5,
     title: "PiYak - Neo-Brutalist Tracker",
     description: "A highly unhinged, neo-brutalist Progressive Web App (PWA) designed to track your daily bowel movements and menstrual cycles, featuring gamified achievements and partner syncing.",

@@ -2,7 +2,7 @@
 import React from "react"
 
 export default function Marquee() {
-  const text = "REACT // NEXT.JS // TYPESCRIPT // TAILWIND // NEO-BRUTALISM // UI/UX // "
+  const text = "REACT // REACT NATIVE // EXPO // NEXT.JS // TYPESCRIPT // TAILWIND // UI/UX // "
   // Duplicate text multiple times to ensure the container is filled so the loop is seamless
   const repeatedText = Array(4).fill(text).join("")
 
