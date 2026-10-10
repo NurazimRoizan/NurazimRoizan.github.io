@@ -8,11 +8,21 @@ const outputDir = path.join(rootDir, 'cv', 'rendercv_output');
 const targetPdf = path.join(rootDir, 'public', 'Nurazim_Roizan_CV.pdf');
 
 console.log('Rendering CV with RenderCV...');
-execSync(`python -m rendercv render "${cvYaml}"`, {
-  cwd: path.join(rootDir, 'cv'),
-  stdio: 'inherit',
-  env: { ...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1' }
-});
+const pythonCmd = process.platform === 'win32' ? 'py' : 'python3';
+try {
+  execSync(`${pythonCmd} -m rendercv render "${cvYaml}"`, {
+    cwd: path.join(rootDir, 'cv'),
+    stdio: 'inherit',
+    env: { ...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1' }
+  });
+} catch (err) {
+  // Fallback to 'python' if 'py' or 'python3' failed
+  execSync(`python -m rendercv render "${cvYaml}"`, {
+    cwd: path.join(rootDir, 'cv'),
+    stdio: 'inherit',
+    env: { ...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1' }
+  });
+}
 
 const pdfFiles = fs.readdirSync(outputDir).filter(f => f.endsWith('.pdf'));
 if (pdfFiles.length > 0) {
