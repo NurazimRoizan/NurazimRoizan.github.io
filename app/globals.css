@@ -265,12 +265,8 @@ dialog::backdrop {
   white-space: nowrap !important;
 }
 
-/* Scrollspy Target Group Progressive Enhancement */
-.scrollspy-nav {
-  scroll-target-group: auto;
-}
-
-.scrollspy-nav a:is(:target-current, .target-current) {
+/* Scrollspy Active State */
+.scrollspy-nav a:is([aria-current="true"], .target-current) {
   background-color: var(--foreground);
   color: var(--background);
   border-color: var(--border);
