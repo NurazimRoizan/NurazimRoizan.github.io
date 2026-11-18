@@ -19,13 +19,16 @@ export default function Sidebar() {
             <div className="mb-6 flex justify-center">
               <img
                 src="/professional-portrait.jpg"
-                alt="Profile"
+                alt="Nurazim Roizan"
+                fetchPriority="high"
+                width={160}
+                height={160}
                 className="w-40 h-40 rounded-none border-4 border-border shadow-brutal object-cover"
               />
             </div>
 
             {/* Name */}
-            <h1 className="text-2xl font-black uppercase tracking-tighter mb-1 text-foreground">Nurazim Roizan</h1>
+            <p className="text-2xl font-black uppercase tracking-tighter mb-1 text-foreground">Nurazim Roizan</p>
 
             {/* Job Title */}
             <p className="text-primary font-bold text-sm mb-6 uppercase tracking-tight">96% Front-End Developer<br/>4% Dark Mode Enthusiast</p>
@@ -49,7 +52,7 @@ export default function Sidebar() {
                     }
                     className="flex items-center gap-3 px-4 py-3 bg-card border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all group text-sm uppercase font-bold"
                   >
-                    <Icon size={20} className="text-foreground group-hover:text-primary transition-colors" />
+                    <Icon size={20} className="text-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
                     <span className="text-foreground group-hover:text-primary transition-colors tracking-wide">{link.label}</span>
                   </a>
                 )

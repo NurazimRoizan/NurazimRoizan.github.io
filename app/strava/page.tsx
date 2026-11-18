@@ -46,11 +46,15 @@ export default async function StravaPage() {
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-16 border-l-8 border-primary pl-6">
-            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-foreground mb-4 flex items-center gap-4">
-              <Zap size={48} className="text-primary hidden md:block" />
+            <h1
+              id="main-content"
+              tabIndex={-1}
+              className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-foreground mb-4 flex items-center gap-4 focus:outline-none"
+            >
+              <Zap size={48} className="text-primary hidden md:block" aria-hidden="true" />
               Strava<br/>Activities
             </h1>
-            <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground max-w-2xl">
+            <p className="text-xl font-bold uppercase tracking-tight text-muted-foreground max-w-2xl text-pretty">
               Documenting my outdoor adventures, from mountain hikes to cycling routes and runs through scenic landscapes.
             </p>
           </div>
@@ -98,13 +102,16 @@ export default async function StravaPage() {
                   <img
                     src={favoriteHike.image || "/placeholder.svg"}
                     alt={favoriteHike.name}
+                    fetchPriority="high"
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover min-h-[300px]"
                   />
                 </div>
                 <div className="flex flex-col justify-between p-8">
                   <div>
                     <p className="text-xs bg-primary text-primary-foreground font-black uppercase tracking-widest inline-block px-2 py-1 mb-4 border-2 border-border shadow-brutal-sm">Favorite Hike</p>
-                    <p className="text-foreground font-medium leading-relaxed mb-6 border-l-4 border-muted pl-4">{favoriteHike.description}</p>
+                    <p className="text-foreground font-medium leading-relaxed mb-6 border-l-4 border-muted pl-4 text-pretty">{favoriteHike.description}</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
@@ -139,7 +146,7 @@ export default async function StravaPage() {
                       ))}
                     </div>
                     <a
-                      href={favoriteHike.stravaUrl}
+                      href={activities[0] ? `https://www.strava.com/activities/${activities[0].id}` : "https://www.strava.com"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block px-6 py-3 bg-primary text-primary-foreground font-black uppercase tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all"

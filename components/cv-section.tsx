@@ -141,7 +141,7 @@ export default function CVSection() {
                   <h4 className="text-2xl font-black uppercase tracking-tight text-foreground mb-1 group-hover:text-primary transition-colors">{exp.title}</h4>
                   <p className="text-lg font-bold text-muted-foreground mb-4">{exp.company}</p>
                   
-                  <p className="text-foreground font-medium leading-relaxed mb-6 border-l-4 border-muted pl-4">
+                  <p className="text-foreground font-medium leading-relaxed mb-6 border-l-4 border-muted pl-4 text-pretty">
                     {exp.description}
                   </p>
 

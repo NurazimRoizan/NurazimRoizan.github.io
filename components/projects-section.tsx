@@ -221,31 +221,35 @@ export default function ProjectsSection() {
           </div>
 
           <div className="space-y-12">
-            {projects.map((project, index) => {
+            {projects.map((project) => {
               return (
                 <Card
                   key={project.id}
                   onClick={() => handleProjectClick(project)}
-                  className={`group overflow-hidden bg-card cursor-pointer border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all rounded-none p-0 flex flex-col md:flex-row h-auto md:h-[400px]`}
+                  className="group relative overflow-hidden bg-card cursor-pointer border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] focus-within:shadow-brutal-sm focus-within:translate-x-[4px] focus-within:translate-y-[4px] transition-all rounded-none p-0 flex flex-col md:flex-row h-auto md:min-h-[400px]"
                 >
                   {/* Project Image */}
                   <div className="relative overflow-hidden border-b-4 md:border-b-0 md:border-r-4 border-border bg-muted w-full md:w-2/5 flex-shrink-0">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
+                      loading="lazy"
+                      width={480}
+                      height={400}
                       className="w-full h-full object-cover transition-all duration-500"
                     />
                     {(project.github || project.live) && (
-                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-4 right-4 z-10 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
                         {project.github && (
                           <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`${project.title} GitHub repository`}
                             onClick={(e) => e.stopPropagation()}
                             className="p-2 bg-background border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-foreground"
                           >
-                            <Github size={20} />
+                            <Github size={20} aria-hidden="true" />
                           </a>
                         )}
                         {project.live && (
@@ -253,10 +257,11 @@ export default function ProjectsSection() {
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`${project.title} live site`}
                             onClick={(e) => e.stopPropagation()}
                             className="p-2 bg-primary border-2 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-primary-foreground"
                           >
-                            <ExternalLink size={20} />
+                            <ExternalLink size={20} aria-hidden="true" />
                           </a>
                         )}
                       </div>
@@ -266,9 +271,18 @@ export default function ProjectsSection() {
                   {/* Project Info */}
                   <div className="p-6 md:p-10 bg-card flex-grow flex flex-col justify-center">
                     <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors text-foreground break-words">
-                      {project.title}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleProjectClick(project)
+                        }}
+                        className="text-left uppercase font-black tracking-tight focus:outline-none focus-visible:underline decoration-primary decoration-4 underline-offset-4"
+                      >
+                        {project.title}
+                      </button>
                     </h3>
-                    <p className="text-lg font-bold text-muted-foreground mb-8 line-clamp-3 leading-relaxed">{project.description}</p>
+                    <p className="text-lg font-bold text-muted-foreground mb-8 line-clamp-3 leading-relaxed text-pretty">{project.description}</p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mt-auto">
@@ -284,7 +298,7 @@ export default function ProjectsSection() {
                   </div>
                 </Card>
               )
-            })} 
+            })}
           </div>
 
           <div className="mt-20 flex justify-center">
@@ -295,7 +309,7 @@ export default function ProjectsSection() {
               className="flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-4 md:py-6 bg-primary text-primary-foreground font-black uppercase tracking-widest border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all group w-full max-w-sm md:max-w-none text-center"
             >
               <span className="text-sm md:text-base break-words">Explore My Creative Portfolio</span>
-              <ExternalLink size={24} className="hidden md:block flex-shrink-0" />
+              <ExternalLink size={24} className="hidden md:block flex-shrink-0" aria-hidden="true" />
             </a>
           </div>
         </div>

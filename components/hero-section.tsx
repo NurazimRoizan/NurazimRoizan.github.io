@@ -23,7 +23,11 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <h1 className="text-6xl sm:text-8xl md:text-[9rem] font-black uppercase tracking-tighter leading-[0.85] mb-8 text-foreground mix-blend-difference">
+        <h1
+          id="main-content"
+          tabIndex={-1}
+          className="text-6xl sm:text-8xl md:text-[9rem] font-black uppercase tracking-tighter leading-[0.85] mb-8 text-foreground mix-blend-difference focus:outline-none"
+        >
           Nurazim
           <br />
           <span className="text-primary block transform -skew-x-6 mt-2">
@@ -32,7 +36,7 @@ export default function HeroSection() {
         </h1>
 
         <div className="bg-card border-l-8 border-primary p-6 shadow-brutal mb-12 max-w-2xl">
-          <p className="text-xl md:text-2xl font-bold uppercase tracking-tight text-foreground leading-snug">
+          <p className="text-xl md:text-2xl font-bold uppercase tracking-tight text-foreground leading-snug text-pretty">
             I force technology to comply with my comfort level to solve micro-inefficiencies in life.
           </p>
         </div>
@@ -41,12 +45,13 @@ export default function HeroSection() {
           <Button
             onClick={() => {
               trackEvent("view_work_click")
-              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+              const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              document.getElementById("projects")?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" })
             }}
             className="px-6 md:px-10 py-4 md:py-8 bg-primary hover:bg-primary text-primary-foreground text-lg md:text-xl uppercase font-black tracking-widest flex items-center justify-center gap-3 border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
           >
             View My Work
-            <ArrowRight size={24} className="md:w-7 md:h-7" />
+            <ArrowRight size={24} className="md:w-7 md:h-7" aria-hidden="true" />
           </Button>
           <Button
             asChild

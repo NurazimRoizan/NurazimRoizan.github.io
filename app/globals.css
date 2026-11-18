@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  color-scheme: light dark;
   --background: oklch(1 0 0);
   --foreground: oklch(0.1 0 0);
   --card: oklch(1 0 0);
@@ -41,7 +42,12 @@
   --sidebar-ring: oklch(0.65 0.2 45);
 }
 
+:root:not(.dark) {
+  color-scheme: light;
+}
+
 .dark {
+  color-scheme: dark;
   --background: oklch(0.05 0 0);
   --foreground: oklch(1 0 0);
   --card: oklch(0.05 0 0);
@@ -79,6 +85,8 @@
 }
 
 @theme inline {
+  --font-sans: var(--font-sans), 'Geist', sans-serif;
+  --font-mono: var(--font-mono), 'Geist Mono', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -128,9 +136,11 @@
     @apply bg-background text-foreground;
   }
 
-  /* Smooth scrolling */
+  /* Smooth scrolling (only when reduced motion is not requested) */
   html {
-    scroll-behavior: smooth;
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   /* Global theme-aware color overrides - Convert cyan to orange in light mode */
@@ -221,7 +231,50 @@
 }
 
 .animate-marquee {
-  animation: marquee 15s linear infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: marquee 15s linear infinite;
+  }
+}
+
+.animate-marquee-paused {
+  animation-play-state: paused !important;
+}
+
+/* Native Modal Dialog Scroll Containment & Backdrop */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* Visually Hidden Utility for Accessible Labels & Skip Links */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Scrollspy Target Group Progressive Enhancement */
+.scrollspy-nav {
+  scroll-target-group: auto;
+}
+
+.scrollspy-nav a:is(:target-current, .target-current) {
+  background-color: var(--foreground);
+  color: var(--background);
+  border-color: var(--border);
+  box-shadow: var(--brutal-shadow-sm);
 }
 
 /* Custom Cursor Rules */

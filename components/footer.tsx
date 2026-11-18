@@ -25,19 +25,19 @@ export default function Footer() {
             <h4 className="font-black uppercase tracking-widest text-foreground mb-6">Quick Links</h4>
             <ul className="space-y-4">
               <li>
-                <a href="#home" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
+                <Link href="/#home" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#projects" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
+                <Link href="/#projects" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
                   Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#cv" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
+                <Link href="/#cv" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
                   CV
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/strava" className="inline-block font-black uppercase tracking-widest text-sm border-b-4 border-transparent hover:border-primary transition-all">
@@ -52,26 +52,29 @@ export default function Footer() {
             <h4 className="font-black uppercase tracking-widest text-foreground mb-6">Connect</h4>
             <div className="flex gap-4">
               <a
-                href="https://github.com"
+                href="https://github.com/NurazimRoizan"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
                 className="p-4 bg-background border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
-                <Github size={24} />
+                <Github size={24} aria-hidden="true" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/nurazimroy"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
                 className="p-4 bg-background border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
-                <Linkedin size={24} />
+                <Linkedin size={24} aria-hidden="true" />
               </a>
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:rnurazim@gmail.com"
+                aria-label="Email"
                 className="p-4 bg-background border-4 border-border shadow-brutal hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
-                <Mail size={24} />
+                <Mail size={24} aria-hidden="true" />
               </a>
             </div>
           </div>

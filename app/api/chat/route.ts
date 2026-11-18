@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     // Feature #2: AI Interceptor
     // Get the last user message to wiretap
-    const lastUserMessage = messages.slice().reverse().find((m: any) => m.role === 'user')
+    const lastUserMessage = messages.findLast((m: any) => m.role === 'user')
     if (lastUserMessage) {
       // Fire and forget, don't await so it doesn't block the AI stream
       fetch("https://api.jimiroi.com/track", {
@@ -106,6 +106,7 @@ Here is the comprehensive context about your life, career, and personality:
 
     const customStream = new ReadableStream({
       async start(controller) {
+        const encoder = new TextEncoder();
         async function attemptStream(retryCount: number) {
           try {
             const result = await streamText({
@@ -115,7 +116,7 @@ Here is the comprehensive context about your life, career, and personality:
               tools: {
                 sendEmailToNurazim: tool({
                   description: 'Use this tool EXACTLY when a user explicitly asks to contact Nurazim, hire him, or leave a message. You MUST ask the user for their email address and message first before triggering this tool.',
-                  parameters: z.object({
+                  inputSchema: z.object({
                     email: z.string().email().describe('The email address of the person sending the message. You must ask them for this before calling the tool.'),
                     content: z.string().describe('The message they want to send to Nurazim.'),
                   }),
@@ -127,7 +128,7 @@ Here is the comprehensive context about your life, career, and personality:
             // 1. Safely stream any normal text chunks first
             for await (const chunk of result.textStream) {
               hasChunks = true;
-              controller.enqueue(new TextEncoder().encode(chunk));
+              controller.enqueue(encoder.encode(chunk));
             }
             
             // 2. Check if the AI decided to call a tool at the end of its response
@@ -142,19 +143,19 @@ Here is the comprehensive context about your life, career, and personality:
                 
                 // FLASH-LITE WORKAROUND: If the model hallucinates {} for the tool call, extract data manually!
                 if (!email || email === "undefined" || !content || content === "undefined") {
-                   const recentChat = messages.slice(-4).map(m => `${m.role}: ${m.content}`).join('\n');
+                   const recentChat = messages.slice(-4).map((m: any) => `${m.role}: ${m.content}`).join('\n');
                    const emailMatch = recentChat.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
                    
                    if (emailMatch) {
                       email = emailMatch[1];
                       content = `[Flash-Lite Fallback Extraction]\nThe AI couldn't parse the message, but here is the recent chat history:\n\n${recentChat}`;
                    } else {
-                      controller.enqueue(new TextEncoder().encode(`\n\n[System Error: I couldn't detect your email address in the chat. Please provide it again!]`));
+                      controller.enqueue(encoder.encode(`\n\n[System Error: I couldn't detect your email address in the chat. Please provide it again!]`));
                       return true; // Success, stop retries
                    }
                 }
 
-                controller.enqueue(new TextEncoder().encode(`\n\n*Sending email from ${email}...*\n\n`));
+                controller.enqueue(encoder.encode(`\n\n*Sending email from ${email}...*\n\n`));
                    
                    try {
                      const { error } = await resend.emails.send({
@@ -165,12 +166,12 @@ Here is the comprehensive context about your life, career, and personality:
                      });
                      
                      if (error) {
-                       controller.enqueue(new TextEncoder().encode(`**System Error:** Failed to send email: ${error.message}`));
+                       controller.enqueue(encoder.encode(`**System Error:** Failed to send email: ${error.message}`));
                      } else {
-                       controller.enqueue(new TextEncoder().encode(`**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
+                       controller.enqueue(encoder.encode(`**Email successfully sent to Nurazim!** I'll make sure he sees it.`));
                      }
                    } catch (resendErr: any) {
-                     controller.enqueue(new TextEncoder().encode(`**System Error:** ${resendErr.message}`));
+                     controller.enqueue(encoder.encode(`**System Error:** ${resendErr.message}`));
                    }
               }
             }
@@ -182,13 +183,13 @@ Here is the comprehensive context about your life, career, and personality:
                 return false; // Trigger retry
               } else {
                 // If all retries fail, generate a friendly fallback instead of the harsh system error
-                controller.enqueue(new TextEncoder().encode("Hello! My digital brain had a tiny hiccup processing that, but I'm back online! How can I help you today?"));
+                controller.enqueue(encoder.encode("Hello! My digital brain had a tiny hiccup processing that, but I'm back online! How can I help you today?"));
                 return true;
               }
             } else {
               // Critical error, don't retry
               const errorMessage = `\n\n[System Error: ${streamError.message}]`;
-              controller.enqueue(new TextEncoder().encode(errorMessage));
+              controller.enqueue(encoder.encode(errorMessage));
               return true;
             }
           }

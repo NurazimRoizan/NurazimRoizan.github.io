@@ -50,8 +50,8 @@ export default function GithubStats() {
   return (
     <div className="border-4 border-black dark:border-cyan-400 p-6 bg-cyan-100 dark:bg-cyan-950/40 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(34,211,238,0.5)] transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_0px_rgba(34,211,238,0.8)]">
       <div className="flex items-center gap-3 mb-4 border-b-4 border-black dark:border-cyan-400 pb-2">
-        <Github className="w-8 h-8 text-black dark:text-cyan-400" />
-        <h2 className="text-2xl font-bold font-mono text-black dark:text-cyan-400 uppercase">Live Github Stats</h2>
+        <Github className="w-8 h-8 text-black dark:text-cyan-400" aria-hidden="true" />
+        <h4 className="text-2xl font-bold font-mono text-black dark:text-cyan-400 uppercase">Live Github Stats</h4>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-4">

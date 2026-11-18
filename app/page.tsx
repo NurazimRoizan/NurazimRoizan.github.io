@@ -12,17 +12,32 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
 
   useEffect(() => {
-    const handleScroll = () => {}
+    const sections = document.querySelectorAll<HTMLElement>("main > [id]")
+    if (sections.length === 0) return
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id")
+            if (id) setActiveSection(id)
+          }
+        }
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId)
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" })
+      element.focus({ preventScroll: true })
     }
   }
 
@@ -30,15 +45,15 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground overflow-hidden">
       <Navigation onNavigate={scrollToSection} activeSection={activeSection} />
 
-      <div id="home">
+      <div id="home" tabIndex={-1} className="focus:outline-none">
         <HeroSection />
       </div>
 
-      <div id="projects">
+      <div id="projects" tabIndex={-1} className="focus:outline-none">
         <ProjectsSection />
       </div>
 
-      <div id="cv">
+      <div id="cv" tabIndex={-1} className="focus:outline-none">
         <CVSection />
       </div>
 
